@@ -1,0 +1,16 @@
+.DS_Store
+
+*.exe
+*.zip
+
+# ====> Sublime Text
+# Sublime Text Project and Workspace Files
+*.sublime-workspace
+*.sublime-project
+
+# ====> VS Code
+# VS Code Config Files
+.vscode/
+
+# log files for monitoring or debugging
+*.log

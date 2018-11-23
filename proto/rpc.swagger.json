@@ -1,0 +1,112 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "rpc.proto",
+    "version": "version not set"
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/object/download": {
+      "post": {
+        "operationId": "GetObject",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/protoGetObjectResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/protoGetObjectRequest"
+            }
+          }
+        ],
+        "tags": [
+          "StoreApiService"
+        ]
+      }
+    },
+    "/object/upload": {
+      "post": {
+        "operationId": "PutObject",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/protoPutObjectResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/protoPutObjectRequest"
+            }
+          }
+        ],
+        "tags": [
+          "StoreApiService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "protoGetObjectRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "protoGetObjectResponse": {
+      "type": "object",
+      "properties": {
+        "res": {
+          "type": "string"
+        }
+      }
+    },
+    "protoPutObjectRequest": {
+      "type": "object",
+      "properties": {
+        "bucket": {
+          "type": "string"
+        }
+      }
+    },
+    "protoPutObjectResponse": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "msg": {
+          "type": "string"
+        },
+        "data": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
