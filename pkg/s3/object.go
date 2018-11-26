@@ -1,57 +1,92 @@
 package s3
 
 import (
-	"bytes"
-	"fmt"
-	"os"
+	"bufio"
+	"net/url"
+	"strings"
+	"time"
 
 	"github.com/ks3sdklib/aws-sdk-go/aws"
 	"github.com/ks3sdklib/aws-sdk-go/service/s3"
-	"github.com/ks3sdklib/aws-sdk-go/service/s3/s3iface"
 )
 
-// Object has object body and metadata
-type Object struct {
-	Body        []byte
-	ContentType string
-}
-
-// GetObject download a file on S3
-func GetObject(svc s3iface.S3API, path Path) Object {
+func (svc *S3) GetObject(bucketName, key, contentType string) (string, error) {
 	input := &s3.GetObjectInput{
-		Bucket: aws.String(path.Bucket),
-		Key:    aws.String(path.Key),
+		Bucket:              aws.String(bucketName),
+		Key:                 aws.String(key),
+		ResponseContentType: aws.String(contentType),
 	}
-	res, err := svc.GetObject(input)
+	res, err := svc.S3.GetObject(input)
 	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
+		return "", err
 	}
-
-	buf := new(bytes.Buffer)
-	if _, err := buf.ReadFrom(res.Body); err != nil {
-		fmt.Println(err)
-		os.Exit(1)
-	}
-
-	return Object{
-		Body:        buf.Bytes(),
-		ContentType: *res.ContentType,
-	}
+	br := bufio.NewReader(res.Body)
+	resBody, _ := br.ReadString('\n')
+	return resBody, nil
 }
 
-// PutObject upload a file to S3
-func (svc *S3) PutObject() error {
+func (svc *S3) HeadObject(bucketName, key string) bool {
+	input := &s3.HeadObjectInput{
+		Bucket: aws.String(bucketName),
+		Key:    aws.String(key),
+	}
+	if _, err := svc.S3.HeadObject(input); err != nil {
+		return false
+	}
+	return true
+}
 
+func (svc *S3) HeadObjectPresignedUrl(bucketName, key string, expireTime int64) (*url.URL, bool) {
+	input := &s3.HeadObjectInput{
+		Bucket: aws.String(bucketName),
+		Key:    aws.String(key),
+	}
+	res, err := svc.S3.HeadObjectPresignedUrl(input, time.Duration(expireTime*1000*1000*1000))
+	if err != nil {
+		return res, false
+	}
+	return res, true
+}
+
+func (svc *S3) PutObject(bucketName, key, fileContent, contentType, publicRead string, size, expireTime int64) error {
 	input := &s3.PutObjectInput{
-		Bucket:             aws.String("wpspdftools"), // bucket名称
-		Key:                aws.String("/hahatest/xxxxxxxxxxhhhh.txt"),  // object key
-		ACL:                aws.String("public-read"),//权限，支持private(私有)，public-read(公开读)
-		Body:               bytes.NewReader([]byte("PAYLOAD")),//要上传的内容
-		ContentType:        aws.String("application/ocet-stream"),//设置content-type
+		Bucket:           aws.String(bucketName),         // bucket名称
+		Key:              aws.String(key),                // object key
+		ACL:              aws.String(publicRead),         //权限，支持private(私有)，public-read(公开读)
+		Body:             strings.NewReader(fileContent), //bytes.NewReader([]byte(fileContent)), //要上传的内容
+		ContentType:      aws.String(contentType),        //设置content-type
+		ContentMaxLength: aws.Long(size),
+		Expires:          aws.Time(time.Now().Add(time.Second * time.Duration(expireTime))),
 	}
 	if _, err := svc.S3.PutObject(input); err != nil {
 		return err
 	}
 	return nil
+}
+
+func (svc *S3) GetObjectPresignedUrl(bucketName, key string, expireTime int64) (string, error) {
+	input := &s3.GetObjectInput{
+		Bucket: aws.String(bucketName),
+		Key:    aws.String(key),
+	}
+	resp, err := svc.S3.GetObjectPresignedUrl(input, time.Duration(expireTime*1000*1000*1000))
+	if err != nil {
+		return "", err
+	}
+	return resp.String(), nil
+}
+
+func (svc *S3) PutObjectPresignedUrl(bucketName, key, contentType, publicRead string, size, expireTime int64) (string, error) {
+	input := &s3.PutObjectInput{
+		Bucket:           aws.String(bucketName),
+		Key:              aws.String(key),
+		ACL:              aws.String(publicRead),
+		ContentType:      aws.String(contentType),
+		ContentMaxLength: aws.Long(size),
+	}
+	resp, err := svc.S3.PutObjectPresignedUrl(input, time.Duration(expireTime*1000*1000*1000))
+	if err != nil {
+		return "", err
+	}
+	return resp.String(), nil
 }
