@@ -1,0 +1,94 @@
+syntax = "proto3";
+
+package proto;
+
+import "google/api/annotations.proto";
+
+service StoreApiService {
+	rpc PutObject(PutObjectRequest) returns (PutObjectResponse) {
+		option (google.api.http) = {
+			post: "/object/upload"
+            body: "*"
+		};
+	}
+	
+	rpc GetObject(GetObjectRequest) returns (GetObjectResponse) {
+		option (google.api.http) = {
+			post: "/object/download"
+			body: "*"
+		};
+	}
+
+	rpc GetObjectPresignedUrl(GetObjectPresignedUrlRequest) returns (GetObjectPresignedUrlResponse) {
+		option (google.api.http) = {
+			post: "/object/downloadurl"
+			body: "*"
+		};
+	}
+
+	rpc PutObjectPresignedUrl(PutObjectPresignedUrlRequest) returns (PutObjectPresignedUrlResponse) {
+		option (google.api.http) = {
+			post: "/object/uploadurl"
+			body: "*"
+		};
+	}
+}
+
+message PutObjectRequest {
+	string store = 1;
+	string bucketname = 2;
+	string key = 3;
+	string publicread = 4;
+	string contenttype = 5;
+	int64 contentmaxlength = 6;
+	string filecontent = 7;
+	int64 expiretime = 8;
+}
+
+message PutObjectResponse {
+	int32 code = 1;
+	string msg = 2;
+    string data = 3;  
+}
+
+message GetObjectRequest {
+	string store = 1;
+	string bucketname = 2;
+	string key = 3;
+	string contenttype = 4;
+}
+
+message GetObjectResponse {
+	int32 code = 1;
+	string msg = 2;
+    string data = 3;  
+}
+
+message GetObjectPresignedUrlRequest {
+	string store = 1;
+	string bucketname = 2;
+	string key = 3;
+	int64 expiretime = 4;
+}
+
+message GetObjectPresignedUrlResponse {
+	int32 code = 1;
+	string msg = 2;
+    string data = 3;  
+}
+
+message PutObjectPresignedUrlRequest {
+	string store = 1;
+	string bucketname = 2;
+	string key = 3;
+	string publicread = 4;
+	string contenttype = 5;
+	int64 contentmaxlength = 6;
+	int64 expiretime = 7;
+}
+
+message PutObjectPresignedUrlResponse {
+	int32 code = 1;
+	string msg = 2;
+    string data = 3;  
+}

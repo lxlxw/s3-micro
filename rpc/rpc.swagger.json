@@ -1,0 +1,279 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "rpc.proto",
+    "version": "version not set"
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/object/download": {
+      "post": {
+        "operationId": "GetObject",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/protoGetObjectResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/protoGetObjectRequest"
+            }
+          }
+        ],
+        "tags": [
+          "StoreApiService"
+        ]
+      }
+    },
+    "/object/downloadurl": {
+      "post": {
+        "operationId": "GetObjectPresignedUrl",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/protoGetObjectPresignedUrlResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/protoGetObjectPresignedUrlRequest"
+            }
+          }
+        ],
+        "tags": [
+          "StoreApiService"
+        ]
+      }
+    },
+    "/object/upload": {
+      "post": {
+        "operationId": "PutObject",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/protoPutObjectResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/protoPutObjectRequest"
+            }
+          }
+        ],
+        "tags": [
+          "StoreApiService"
+        ]
+      }
+    },
+    "/object/uploadurl": {
+      "post": {
+        "operationId": "PutObjectPresignedUrl",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/protoPutObjectPresignedUrlResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/protoPutObjectPresignedUrlRequest"
+            }
+          }
+        ],
+        "tags": [
+          "StoreApiService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "protoGetObjectPresignedUrlRequest": {
+      "type": "object",
+      "properties": {
+        "store": {
+          "type": "string"
+        },
+        "bucketname": {
+          "type": "string"
+        },
+        "key": {
+          "type": "string"
+        },
+        "expiretime": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "protoGetObjectPresignedUrlResponse": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "msg": {
+          "type": "string"
+        },
+        "data": {
+          "type": "string"
+        }
+      }
+    },
+    "protoGetObjectRequest": {
+      "type": "object",
+      "properties": {
+        "store": {
+          "type": "string"
+        },
+        "bucketname": {
+          "type": "string"
+        },
+        "key": {
+          "type": "string"
+        },
+        "contenttype": {
+          "type": "string"
+        }
+      }
+    },
+    "protoGetObjectResponse": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "msg": {
+          "type": "string"
+        },
+        "data": {
+          "type": "string"
+        }
+      }
+    },
+    "protoPutObjectPresignedUrlRequest": {
+      "type": "object",
+      "properties": {
+        "store": {
+          "type": "string"
+        },
+        "bucketname": {
+          "type": "string"
+        },
+        "key": {
+          "type": "string"
+        },
+        "publicread": {
+          "type": "string"
+        },
+        "contenttype": {
+          "type": "string"
+        },
+        "contentmaxlength": {
+          "type": "string",
+          "format": "int64"
+        },
+        "expiretime": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "protoPutObjectPresignedUrlResponse": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "msg": {
+          "type": "string"
+        },
+        "data": {
+          "type": "string"
+        }
+      }
+    },
+    "protoPutObjectRequest": {
+      "type": "object",
+      "properties": {
+        "store": {
+          "type": "string"
+        },
+        "bucketname": {
+          "type": "string"
+        },
+        "key": {
+          "type": "string"
+        },
+        "publicread": {
+          "type": "string"
+        },
+        "contenttype": {
+          "type": "string"
+        },
+        "contentmaxlength": {
+          "type": "string",
+          "format": "int64"
+        },
+        "filecontent": {
+          "type": "string"
+        },
+        "expiretime": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "protoPutObjectResponse": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "msg": {
+          "type": "string"
+        },
+        "data": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

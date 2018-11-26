@@ -4,8 +4,8 @@ import (
 	"log"
 
 	"github.com/spf13/cobra"
-	
-	"wps_store/proto/server_http"
+
+	"wps_store/rpc/server_http"
 )
 
 var serverHttpCmd = &cobra.Command{
@@ -17,7 +17,7 @@ var serverHttpCmd = &cobra.Command{
 				log.Println("Recover error : %v", err)
 			}
 		}()
-		
+
 		server_http.Run()
 	},
 }
@@ -25,6 +25,6 @@ var serverHttpCmd = &cobra.Command{
 func init() {
 	serverHttpCmd.Flags().StringVarP(&server_http.ServerPort, "server-port", "p", "50052", "server port")
 	serverHttpCmd.Flags().StringVarP(&server_http.ServerHttpPort, "http-port", "u", "8088", "http server port")
-	
+
 	rootCmd.AddCommand(serverHttpCmd)
 }

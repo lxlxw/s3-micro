@@ -2,6 +2,7 @@
 
 *.exe
 *.zip
+*.bak
 
 # ====> Sublime Text
 # Sublime Text Project and Workspace Files

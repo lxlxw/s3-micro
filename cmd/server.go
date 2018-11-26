@@ -4,8 +4,8 @@ import (
 	"log"
 
 	"github.com/spf13/cobra"
-	
-	"wps_store/proto/server"
+
+	"wps_store/rpc/server"
 )
 
 var serverCmd = &cobra.Command{
@@ -17,7 +17,7 @@ var serverCmd = &cobra.Command{
 				log.Println("Recover error : %v", err)
 			}
 		}()
-		
+
 		server.Run()
 	},
 }
@@ -28,6 +28,6 @@ func init() {
 	// serverCmd.Flags().StringVarP(&server.CertKeyPath, "cert-key", "", "./conf/certs/server.key", "cert-key path")
 	// serverCmd.Flags().StringVarP(&server.CertServerName, "cert-name", "", "", "server's hostname")
 	//serverCmd.Flags().StringVarP(&server.SwaggerDir, "swagger-dir", "", "proto", "path to the directory which contains swagger definitions")
-	
+
 	rootCmd.AddCommand(serverCmd)
 }
