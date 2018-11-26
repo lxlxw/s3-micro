@@ -6,10 +6,11 @@ package proto
 import (
 	context "context"
 	fmt "fmt"
-	proto "github.com/golang/protobuf/proto"
-	grpc "google.golang.org/grpc"
 	math "math"
 	_ "wps_store/rpc/google/api"
+
+	proto "github.com/golang/protobuf/proto"
+	grpc "google.golang.org/grpc"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
