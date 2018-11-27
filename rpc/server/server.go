@@ -16,7 +16,6 @@ var (
 )
 
 type apiService struct {
-	ssss string
 }
 
 func NewStoreApiService() *apiService {

@@ -1,6 +1,7 @@
 package util
 
 import (
+	"bytes"
 	"io/ioutil"
 	"os"
 	"runtime"
@@ -33,6 +34,16 @@ var configInfo Config
 var confName string
 var ostype = runtime.GOOS
 
+// 格式化toml文件
+func EncodeConfig(conf *Config) (string, error) {
+	buf := new(bytes.Buffer)
+	if err := toml.NewEncoder(buf).Encode(conf); err != nil {
+		return "", err
+	}
+	return buf.String(), nil
+}
+
+// 解析配置文件
 func ParseConfigFile(filePath string) {
 	fi, err := os.Open(filePath)
 	if err != nil {
@@ -45,28 +56,13 @@ func ParseConfigFile(filePath string) {
 	}
 }
 
+// 获取配置文件信息
 func GetConfig() Config {
 	return configInfo
 }
 
-func GetProjectPath() string {
-	var projectPath string
-	projectPath, _ = os.Getwd()
-	return projectPath
-}
-
-func GetConfigPath(confName string) string {
-	path := GetProjectPath()
-	if ostype == "windows" {
-		path = path + "\\" + "conf\\" + confName
-	} else if ostype == "linux" {
-		path = path + "/" + "conf/" + confName
-	}
-	return path
-}
-
+// 生效配置文件
 func SetConfig() {
-
 	goEnv := os.Getenv("GOENV")
 	switch goEnv {
 	case "dev":

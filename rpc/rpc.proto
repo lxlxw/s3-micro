@@ -32,6 +32,20 @@ service StoreApiService {
 			body: "*"
 		};
 	}
+
+	rpc UpdateConfigStoreInfo(UpdateConfigStoreInfoRequest) returns (UpdateConfigStoreInfoResponse) {
+		option (google.api.http) = {
+			post: "/config/store/upload"
+			body: "*"
+		};
+	}
+
+	rpc GetConfigStoreInfo(GetConfigStoreInfoRequest) returns (GetConfigStoreInfoResponse) {
+		option (google.api.http) = {
+			get: "/config/store/download"
+			body: "*"
+		};
+	}
 }
 
 message PutObjectRequest {
@@ -91,4 +105,35 @@ message PutObjectPresignedUrlResponse {
 	int32 code = 1;
 	string msg = 2;
     string data = 3;  
+}
+
+message UpdateConfigStoreInfoRequest {
+	string store = 1;
+	string domain = 2;
+	string accesskey = 3;
+	string secretkey = 4;
+	string region = 5;
+}
+
+message UpdateConfigStoreInfoResponse {
+	int32 code = 1;
+	string msg = 2;
+    string data = 3;
+}
+
+message GetConfigStoreInfoRequest {
+	string store = 1;
+}
+
+message GetConfigStoreInfoResponse {
+	int32 code = 1;
+	string msg = 2;
+    ConfigInfo data = 3;
+}
+
+message ConfigInfo {
+    string accesskey = 1;   
+	string secretkey = 2;
+	string region = 3;
+	string endpoint = 4;
 }

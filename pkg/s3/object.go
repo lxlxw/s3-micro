@@ -25,15 +25,15 @@ func (svc *S3) GetObject(bucketName, key, contentType string) (string, error) {
 	return resBody, nil
 }
 
-func (svc *S3) HeadObject(bucketName, key string) bool {
+func (svc *S3) HeadObject(bucketName, key string) (bool, error) {
 	input := &s3.HeadObjectInput{
 		Bucket: aws.String(bucketName),
 		Key:    aws.String(key),
 	}
 	if _, err := svc.S3.HeadObject(input); err != nil {
-		return false
+		return false, err
 	}
-	return true
+	return true, nil
 }
 
 func (svc *S3) HeadObjectPresignedUrl(bucketName, key string, expireTime int64) (*url.URL, bool) {

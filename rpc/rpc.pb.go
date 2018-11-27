@@ -6,11 +6,10 @@ package proto
 import (
 	context "context"
 	fmt "fmt"
-	math "math"
-	_ "wps_store/rpc/google/api"
-
 	proto "github.com/golang/protobuf/proto"
 	grpc "google.golang.org/grpc"
+	math "math"
+	_ "wps_store/rpc/google/api"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -23,6 +22,289 @@ var _ = math.Inf
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
 const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+
+type UpdateConfigStoreInfoRequest struct {
+	Store                string   `protobuf:"bytes,1,opt,name=store,proto3" json:"store,omitempty"`
+	Domain               string   `protobuf:"bytes,2,opt,name=domain,proto3" json:"domain,omitempty"`
+	Accesskey            string   `protobuf:"bytes,3,opt,name=accesskey,proto3" json:"accesskey,omitempty"`
+	Secretkey            string   `protobuf:"bytes,4,opt,name=secretkey,proto3" json:"secretkey,omitempty"`
+	Region               string   `protobuf:"bytes,5,opt,name=region,proto3" json:"region,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *UpdateConfigStoreInfoRequest) Reset()         { *m = UpdateConfigStoreInfoRequest{} }
+func (m *UpdateConfigStoreInfoRequest) String() string { return proto.CompactTextString(m) }
+func (*UpdateConfigStoreInfoRequest) ProtoMessage()    {}
+func (*UpdateConfigStoreInfoRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_77a6da22d6a3feb1, []int{0}
+}
+
+func (m *UpdateConfigStoreInfoRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_UpdateConfigStoreInfoRequest.Unmarshal(m, b)
+}
+func (m *UpdateConfigStoreInfoRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_UpdateConfigStoreInfoRequest.Marshal(b, m, deterministic)
+}
+func (m *UpdateConfigStoreInfoRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_UpdateConfigStoreInfoRequest.Merge(m, src)
+}
+func (m *UpdateConfigStoreInfoRequest) XXX_Size() int {
+	return xxx_messageInfo_UpdateConfigStoreInfoRequest.Size(m)
+}
+func (m *UpdateConfigStoreInfoRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_UpdateConfigStoreInfoRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_UpdateConfigStoreInfoRequest proto.InternalMessageInfo
+
+func (m *UpdateConfigStoreInfoRequest) GetStore() string {
+	if m != nil {
+		return m.Store
+	}
+	return ""
+}
+
+func (m *UpdateConfigStoreInfoRequest) GetDomain() string {
+	if m != nil {
+		return m.Domain
+	}
+	return ""
+}
+
+func (m *UpdateConfigStoreInfoRequest) GetAccesskey() string {
+	if m != nil {
+		return m.Accesskey
+	}
+	return ""
+}
+
+func (m *UpdateConfigStoreInfoRequest) GetSecretkey() string {
+	if m != nil {
+		return m.Secretkey
+	}
+	return ""
+}
+
+func (m *UpdateConfigStoreInfoRequest) GetRegion() string {
+	if m != nil {
+		return m.Region
+	}
+	return ""
+}
+
+type UpdateConfigStoreInfoResponse struct {
+	Code                 int32    `protobuf:"varint,1,opt,name=code,proto3" json:"code,omitempty"`
+	Msg                  string   `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
+	Data                 string   `protobuf:"bytes,3,opt,name=data,proto3" json:"data,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *UpdateConfigStoreInfoResponse) Reset()         { *m = UpdateConfigStoreInfoResponse{} }
+func (m *UpdateConfigStoreInfoResponse) String() string { return proto.CompactTextString(m) }
+func (*UpdateConfigStoreInfoResponse) ProtoMessage()    {}
+func (*UpdateConfigStoreInfoResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_77a6da22d6a3feb1, []int{1}
+}
+
+func (m *UpdateConfigStoreInfoResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_UpdateConfigStoreInfoResponse.Unmarshal(m, b)
+}
+func (m *UpdateConfigStoreInfoResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_UpdateConfigStoreInfoResponse.Marshal(b, m, deterministic)
+}
+func (m *UpdateConfigStoreInfoResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_UpdateConfigStoreInfoResponse.Merge(m, src)
+}
+func (m *UpdateConfigStoreInfoResponse) XXX_Size() int {
+	return xxx_messageInfo_UpdateConfigStoreInfoResponse.Size(m)
+}
+func (m *UpdateConfigStoreInfoResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_UpdateConfigStoreInfoResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_UpdateConfigStoreInfoResponse proto.InternalMessageInfo
+
+func (m *UpdateConfigStoreInfoResponse) GetCode() int32 {
+	if m != nil {
+		return m.Code
+	}
+	return 0
+}
+
+func (m *UpdateConfigStoreInfoResponse) GetMsg() string {
+	if m != nil {
+		return m.Msg
+	}
+	return ""
+}
+
+func (m *UpdateConfigStoreInfoResponse) GetData() string {
+	if m != nil {
+		return m.Data
+	}
+	return ""
+}
+
+type GetConfigStoreInfoRequest struct {
+	Store                string   `protobuf:"bytes,1,opt,name=store,proto3" json:"store,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *GetConfigStoreInfoRequest) Reset()         { *m = GetConfigStoreInfoRequest{} }
+func (m *GetConfigStoreInfoRequest) String() string { return proto.CompactTextString(m) }
+func (*GetConfigStoreInfoRequest) ProtoMessage()    {}
+func (*GetConfigStoreInfoRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_77a6da22d6a3feb1, []int{2}
+}
+
+func (m *GetConfigStoreInfoRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_GetConfigStoreInfoRequest.Unmarshal(m, b)
+}
+func (m *GetConfigStoreInfoRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_GetConfigStoreInfoRequest.Marshal(b, m, deterministic)
+}
+func (m *GetConfigStoreInfoRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GetConfigStoreInfoRequest.Merge(m, src)
+}
+func (m *GetConfigStoreInfoRequest) XXX_Size() int {
+	return xxx_messageInfo_GetConfigStoreInfoRequest.Size(m)
+}
+func (m *GetConfigStoreInfoRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_GetConfigStoreInfoRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GetConfigStoreInfoRequest proto.InternalMessageInfo
+
+func (m *GetConfigStoreInfoRequest) GetStore() string {
+	if m != nil {
+		return m.Store
+	}
+	return ""
+}
+
+type GetConfigStoreInfoResponse struct {
+	Code                 int32       `protobuf:"varint,1,opt,name=code,proto3" json:"code,omitempty"`
+	Msg                  string      `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
+	Data                 *ConfigInfo `protobuf:"bytes,3,opt,name=data,proto3" json:"data,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
+	XXX_unrecognized     []byte      `json:"-"`
+	XXX_sizecache        int32       `json:"-"`
+}
+
+func (m *GetConfigStoreInfoResponse) Reset()         { *m = GetConfigStoreInfoResponse{} }
+func (m *GetConfigStoreInfoResponse) String() string { return proto.CompactTextString(m) }
+func (*GetConfigStoreInfoResponse) ProtoMessage()    {}
+func (*GetConfigStoreInfoResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_77a6da22d6a3feb1, []int{3}
+}
+
+func (m *GetConfigStoreInfoResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_GetConfigStoreInfoResponse.Unmarshal(m, b)
+}
+func (m *GetConfigStoreInfoResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_GetConfigStoreInfoResponse.Marshal(b, m, deterministic)
+}
+func (m *GetConfigStoreInfoResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GetConfigStoreInfoResponse.Merge(m, src)
+}
+func (m *GetConfigStoreInfoResponse) XXX_Size() int {
+	return xxx_messageInfo_GetConfigStoreInfoResponse.Size(m)
+}
+func (m *GetConfigStoreInfoResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_GetConfigStoreInfoResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GetConfigStoreInfoResponse proto.InternalMessageInfo
+
+func (m *GetConfigStoreInfoResponse) GetCode() int32 {
+	if m != nil {
+		return m.Code
+	}
+	return 0
+}
+
+func (m *GetConfigStoreInfoResponse) GetMsg() string {
+	if m != nil {
+		return m.Msg
+	}
+	return ""
+}
+
+func (m *GetConfigStoreInfoResponse) GetData() *ConfigInfo {
+	if m != nil {
+		return m.Data
+	}
+	return nil
+}
+
+type ConfigInfo struct {
+	Accesskey            string   `protobuf:"bytes,1,opt,name=accesskey,proto3" json:"accesskey,omitempty"`
+	Secretkey            string   `protobuf:"bytes,2,opt,name=secretkey,proto3" json:"secretkey,omitempty"`
+	Region               string   `protobuf:"bytes,3,opt,name=region,proto3" json:"region,omitempty"`
+	Endpoint             string   `protobuf:"bytes,4,opt,name=endpoint,proto3" json:"endpoint,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *ConfigInfo) Reset()         { *m = ConfigInfo{} }
+func (m *ConfigInfo) String() string { return proto.CompactTextString(m) }
+func (*ConfigInfo) ProtoMessage()    {}
+func (*ConfigInfo) Descriptor() ([]byte, []int) {
+	return fileDescriptor_77a6da22d6a3feb1, []int{4}
+}
+
+func (m *ConfigInfo) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ConfigInfo.Unmarshal(m, b)
+}
+func (m *ConfigInfo) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ConfigInfo.Marshal(b, m, deterministic)
+}
+func (m *ConfigInfo) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ConfigInfo.Merge(m, src)
+}
+func (m *ConfigInfo) XXX_Size() int {
+	return xxx_messageInfo_ConfigInfo.Size(m)
+}
+func (m *ConfigInfo) XXX_DiscardUnknown() {
+	xxx_messageInfo_ConfigInfo.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ConfigInfo proto.InternalMessageInfo
+
+func (m *ConfigInfo) GetAccesskey() string {
+	if m != nil {
+		return m.Accesskey
+	}
+	return ""
+}
+
+func (m *ConfigInfo) GetSecretkey() string {
+	if m != nil {
+		return m.Secretkey
+	}
+	return ""
+}
+
+func (m *ConfigInfo) GetRegion() string {
+	if m != nil {
+		return m.Region
+	}
+	return ""
+}
+
+func (m *ConfigInfo) GetEndpoint() string {
+	if m != nil {
+		return m.Endpoint
+	}
+	return ""
+}
 
 type PutObjectRequest struct {
 	Store                string   `protobuf:"bytes,1,opt,name=store,proto3" json:"store,omitempty"`
@@ -42,7 +324,7 @@ func (m *PutObjectRequest) Reset()         { *m = PutObjectRequest{} }
 func (m *PutObjectRequest) String() string { return proto.CompactTextString(m) }
 func (*PutObjectRequest) ProtoMessage()    {}
 func (*PutObjectRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_77a6da22d6a3feb1, []int{0}
+	return fileDescriptor_77a6da22d6a3feb1, []int{5}
 }
 
 func (m *PutObjectRequest) XXX_Unmarshal(b []byte) error {
@@ -132,7 +414,7 @@ func (m *PutObjectResponse) Reset()         { *m = PutObjectResponse{} }
 func (m *PutObjectResponse) String() string { return proto.CompactTextString(m) }
 func (*PutObjectResponse) ProtoMessage()    {}
 func (*PutObjectResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_77a6da22d6a3feb1, []int{1}
+	return fileDescriptor_77a6da22d6a3feb1, []int{6}
 }
 
 func (m *PutObjectResponse) XXX_Unmarshal(b []byte) error {
@@ -188,7 +470,7 @@ func (m *GetObjectRequest) Reset()         { *m = GetObjectRequest{} }
 func (m *GetObjectRequest) String() string { return proto.CompactTextString(m) }
 func (*GetObjectRequest) ProtoMessage()    {}
 func (*GetObjectRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_77a6da22d6a3feb1, []int{2}
+	return fileDescriptor_77a6da22d6a3feb1, []int{7}
 }
 
 func (m *GetObjectRequest) XXX_Unmarshal(b []byte) error {
@@ -250,7 +532,7 @@ func (m *GetObjectResponse) Reset()         { *m = GetObjectResponse{} }
 func (m *GetObjectResponse) String() string { return proto.CompactTextString(m) }
 func (*GetObjectResponse) ProtoMessage()    {}
 func (*GetObjectResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_77a6da22d6a3feb1, []int{3}
+	return fileDescriptor_77a6da22d6a3feb1, []int{8}
 }
 
 func (m *GetObjectResponse) XXX_Unmarshal(b []byte) error {
@@ -306,7 +588,7 @@ func (m *GetObjectPresignedUrlRequest) Reset()         { *m = GetObjectPresigned
 func (m *GetObjectPresignedUrlRequest) String() string { return proto.CompactTextString(m) }
 func (*GetObjectPresignedUrlRequest) ProtoMessage()    {}
 func (*GetObjectPresignedUrlRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_77a6da22d6a3feb1, []int{4}
+	return fileDescriptor_77a6da22d6a3feb1, []int{9}
 }
 
 func (m *GetObjectPresignedUrlRequest) XXX_Unmarshal(b []byte) error {
@@ -368,7 +650,7 @@ func (m *GetObjectPresignedUrlResponse) Reset()         { *m = GetObjectPresigne
 func (m *GetObjectPresignedUrlResponse) String() string { return proto.CompactTextString(m) }
 func (*GetObjectPresignedUrlResponse) ProtoMessage()    {}
 func (*GetObjectPresignedUrlResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_77a6da22d6a3feb1, []int{5}
+	return fileDescriptor_77a6da22d6a3feb1, []int{10}
 }
 
 func (m *GetObjectPresignedUrlResponse) XXX_Unmarshal(b []byte) error {
@@ -427,7 +709,7 @@ func (m *PutObjectPresignedUrlRequest) Reset()         { *m = PutObjectPresigned
 func (m *PutObjectPresignedUrlRequest) String() string { return proto.CompactTextString(m) }
 func (*PutObjectPresignedUrlRequest) ProtoMessage()    {}
 func (*PutObjectPresignedUrlRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_77a6da22d6a3feb1, []int{6}
+	return fileDescriptor_77a6da22d6a3feb1, []int{11}
 }
 
 func (m *PutObjectPresignedUrlRequest) XXX_Unmarshal(b []byte) error {
@@ -510,7 +792,7 @@ func (m *PutObjectPresignedUrlResponse) Reset()         { *m = PutObjectPresigne
 func (m *PutObjectPresignedUrlResponse) String() string { return proto.CompactTextString(m) }
 func (*PutObjectPresignedUrlResponse) ProtoMessage()    {}
 func (*PutObjectPresignedUrlResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_77a6da22d6a3feb1, []int{7}
+	return fileDescriptor_77a6da22d6a3feb1, []int{12}
 }
 
 func (m *PutObjectPresignedUrlResponse) XXX_Unmarshal(b []byte) error {
@@ -553,6 +835,11 @@ func (m *PutObjectPresignedUrlResponse) GetData() string {
 }
 
 func init() {
+	proto.RegisterType((*UpdateConfigStoreInfoRequest)(nil), "proto.UpdateConfigStoreInfoRequest")
+	proto.RegisterType((*UpdateConfigStoreInfoResponse)(nil), "proto.UpdateConfigStoreInfoResponse")
+	proto.RegisterType((*GetConfigStoreInfoRequest)(nil), "proto.GetConfigStoreInfoRequest")
+	proto.RegisterType((*GetConfigStoreInfoResponse)(nil), "proto.GetConfigStoreInfoResponse")
+	proto.RegisterType((*ConfigInfo)(nil), "proto.ConfigInfo")
 	proto.RegisterType((*PutObjectRequest)(nil), "proto.PutObjectRequest")
 	proto.RegisterType((*PutObjectResponse)(nil), "proto.PutObjectResponse")
 	proto.RegisterType((*GetObjectRequest)(nil), "proto.GetObjectRequest")
@@ -566,39 +853,50 @@ func init() {
 func init() { proto.RegisterFile("rpc.proto", fileDescriptor_77a6da22d6a3feb1) }
 
 var fileDescriptor_77a6da22d6a3feb1 = []byte{
-	// 499 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xbc, 0x54, 0xbd, 0x6e, 0xd4, 0x40,
-	0x10, 0x96, 0xef, 0x27, 0xe1, 0x06, 0x09, 0x9c, 0x0d, 0x07, 0xcb, 0x71, 0x44, 0xa7, 0x85, 0x22,
-	0x4a, 0x91, 0x93, 0xa0, 0xa3, 0xa3, 0xa2, 0x42, 0x44, 0x17, 0x51, 0x44, 0x54, 0x7b, 0xf6, 0x60,
-	0x96, 0xf8, 0x76, 0x97, 0xf5, 0x1a, 0x12, 0x89, 0x02, 0xa5, 0xa0, 0xa0, 0xe5, 0xc9, 0x10, 0xaf,
-	0xc0, 0x23, 0xf0, 0x00, 0x68, 0xd7, 0x8e, 0x71, 0xec, 0xcb, 0x35, 0xa7, 0x4b, 0xe5, 0xf1, 0xcc,
-	0xf8, 0xf3, 0xf7, 0x7d, 0x33, 0xbb, 0x30, 0x30, 0x3a, 0x3a, 0xd4, 0x46, 0x59, 0x45, 0xfa, 0xfe,
-	0x31, 0x1a, 0x27, 0x4a, 0x25, 0x29, 0x4e, 0xb9, 0x16, 0x53, 0x2e, 0xa5, 0xb2, 0xdc, 0x0a, 0x25,
-	0xb3, 0xa2, 0x89, 0xfd, 0xe8, 0x40, 0x78, 0x94, 0xdb, 0x37, 0xf3, 0x8f, 0x18, 0xd9, 0x19, 0x7e,
-	0xca, 0x31, 0xb3, 0xe4, 0x1e, 0xf4, 0x33, 0xab, 0x0c, 0xd2, 0x60, 0x12, 0xec, 0x0f, 0x66, 0xc5,
-	0x0b, 0xd9, 0x03, 0x98, 0xe7, 0xd1, 0x29, 0x5a, 0xc9, 0x17, 0x48, 0x3b, 0xbe, 0x54, 0xcb, 0x90,
-	0x10, 0xba, 0xa7, 0x78, 0x4e, 0xbb, 0xbe, 0xe0, 0x42, 0xf7, 0x85, 0xce, 0xe7, 0xa9, 0x88, 0x0c,
-	0xf2, 0x98, 0xf6, 0x8a, 0x2f, 0xfe, 0x67, 0xc8, 0x04, 0x6e, 0x47, 0x4a, 0x5a, 0x94, 0xd6, 0x9e,
-	0x6b, 0xa4, 0x7d, 0xdf, 0x50, 0x4f, 0x91, 0x03, 0x08, 0xcb, 0xd7, 0x05, 0x3f, 0x4b, 0x51, 0x26,
-	0xf6, 0x03, 0xdd, 0x9a, 0x04, 0xfb, 0xdd, 0x59, 0x2b, 0xef, 0xd0, 0xde, 0x8b, 0x14, 0xcb, 0x3c,
-	0xdd, 0x2e, 0xd0, 0x6a, 0x29, 0xc7, 0x07, 0xcf, 0xb4, 0x30, 0x68, 0xc5, 0x02, 0xe9, 0x2d, 0x8f,
-	0x53, 0xcb, 0xb0, 0xd7, 0xb0, 0x53, 0xf3, 0x22, 0xd3, 0x4a, 0x66, 0x48, 0x08, 0xf4, 0x22, 0x15,
-	0x17, 0x5e, 0xf4, 0x67, 0x3e, 0x76, 0x52, 0x17, 0x59, 0x52, 0x7a, 0xe0, 0x42, 0xd7, 0x15, 0x73,
-	0xcb, 0x4b, 0xf5, 0x3e, 0x66, 0x5f, 0x21, 0x7c, 0x85, 0x1b, 0xb2, 0xb6, 0x61, 0x5d, 0xaf, 0x65,
-	0x9d, 0x13, 0x53, 0xfb, 0xfb, 0xda, 0x62, 0xbe, 0x07, 0x30, 0xae, 0xf0, 0x8e, 0x0c, 0x66, 0x22,
-	0x91, 0x18, 0xbf, 0x35, 0xe9, 0x06, 0x96, 0xa6, 0x36, 0xa4, 0x5e, 0x6b, 0x48, 0x27, 0xf0, 0xf8,
-	0x1a, 0x1e, 0x6b, 0x6b, 0xfc, 0x1b, 0xc0, 0xb8, 0x5a, 0x80, 0x0d, 0x6b, 0xbc, 0xc1, 0x83, 0x71,
-	0xd5, 0xd1, 0xed, 0x65, 0x8e, 0x5e, 0xa3, 0x7a, 0x5d, 0x47, 0x9f, 0xfd, 0xea, 0xc2, 0xdd, 0x63,
-	0x67, 0xd2, 0x4b, 0x2d, 0x8e, 0xd1, 0x7c, 0x16, 0x11, 0x92, 0x13, 0x18, 0x54, 0xbf, 0x23, 0x0f,
-	0x8a, 0x7b, 0xe8, 0xb0, 0x79, 0x07, 0x8d, 0x68, 0xbb, 0x50, 0xb0, 0x61, 0x0f, 0x2f, 0x7e, 0xff,
-	0xf9, 0xd9, 0xd9, 0x65, 0x77, 0xa6, 0xca, 0x17, 0xa6, 0xb9, 0x4e, 0x15, 0x8f, 0x5f, 0x04, 0x07,
-	0xe4, 0x1d, 0x0c, 0xaa, 0xdd, 0xa8, 0xa0, 0x9b, 0x67, 0xb0, 0x82, 0x6e, 0x1d, 0x0f, 0xf6, 0xc8,
-	0x43, 0x0f, 0x59, 0x78, 0x09, 0x1d, 0xab, 0x2f, 0xf2, 0x12, 0xfc, 0x22, 0x80, 0xe1, 0xd2, 0xcd,
-	0x23, 0x4f, 0x9a, 0x80, 0x4b, 0x76, 0x67, 0xf4, 0x74, 0x75, 0x53, 0xc9, 0x60, 0xcf, 0x33, 0xa0,
-	0x6c, 0xb7, 0xc9, 0x20, 0x37, 0xa9, 0x23, 0xf1, 0x2d, 0x80, 0xe1, 0xd2, 0x61, 0x55, 0x24, 0x56,
-	0x2d, 0x70, 0x45, 0x62, 0xe5, 0xbc, 0xd9, 0xd8, 0x93, 0xb8, 0xcf, 0x76, 0xae, 0x3a, 0x5c, 0x50,
-	0x98, 0x6f, 0x79, 0x88, 0xe7, 0xff, 0x02, 0x00, 0x00, 0xff, 0xff, 0x52, 0xcb, 0x49, 0x9c, 0x6b,
-	0x06, 0x00, 0x00,
+	// 688 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xbc, 0x56, 0xcd, 0x6e, 0xd3, 0x4c,
+	0x14, 0x95, 0xf3, 0xd3, 0x36, 0xb7, 0xd2, 0xf7, 0xa5, 0xd3, 0xa6, 0xb8, 0x69, 0x5a, 0xd2, 0x01,
+	0xa4, 0xaa, 0x8b, 0x46, 0x94, 0x1d, 0x3b, 0xc4, 0xa2, 0x62, 0x81, 0xa8, 0x52, 0x75, 0x51, 0xb1,
+	0x72, 0xec, 0x5b, 0x33, 0xd4, 0x99, 0x31, 0xf6, 0x04, 0x5a, 0xa9, 0x0b, 0x54, 0x24, 0x16, 0x6c,
+	0x79, 0x01, 0xde, 0x09, 0xf1, 0x06, 0x3c, 0x02, 0x0f, 0x80, 0x66, 0x3c, 0x75, 0x26, 0x7f, 0x96,
+	0xaa, 0x28, 0xac, 0x32, 0x73, 0xee, 0xf8, 0xdc, 0x73, 0xcf, 0xbd, 0x63, 0x07, 0x6a, 0x49, 0xec,
+	0x1f, 0xc6, 0x89, 0x90, 0x82, 0x54, 0xf5, 0x4f, 0xb3, 0x15, 0x0a, 0x11, 0x46, 0xd8, 0xf1, 0x62,
+	0xd6, 0xf1, 0x38, 0x17, 0xd2, 0x93, 0x4c, 0xf0, 0x34, 0x3b, 0x44, 0x7f, 0x38, 0xd0, 0x3a, 0x8b,
+	0x03, 0x4f, 0xe2, 0x4b, 0xc1, 0x2f, 0x58, 0x78, 0x2a, 0x45, 0x82, 0xaf, 0xf8, 0x85, 0xe8, 0xe2,
+	0x87, 0x01, 0xa6, 0x92, 0x6c, 0x40, 0x35, 0x55, 0x98, 0xeb, 0xb4, 0x9d, 0xfd, 0x5a, 0x37, 0xdb,
+	0x90, 0x4d, 0x58, 0x0a, 0x44, 0xdf, 0x63, 0xdc, 0x2d, 0x69, 0xd8, 0xec, 0x48, 0x0b, 0x6a, 0x9e,
+	0xef, 0x63, 0x9a, 0x5e, 0xe2, 0xb5, 0x5b, 0xd6, 0xa1, 0x21, 0xa0, 0xa2, 0x29, 0xfa, 0x09, 0x4a,
+	0x15, 0xad, 0x64, 0xd1, 0x1c, 0x50, 0x9c, 0x09, 0x86, 0x4c, 0x70, 0xb7, 0x9a, 0x71, 0x66, 0x3b,
+	0x7a, 0x0e, 0x3b, 0x33, 0x14, 0xa6, 0xb1, 0xe0, 0x29, 0x12, 0x02, 0x15, 0x5f, 0x04, 0x99, 0xc2,
+	0x6a, 0x57, 0xaf, 0x49, 0x1d, 0xca, 0xfd, 0x34, 0x34, 0xea, 0xd4, 0x52, 0x9d, 0x0a, 0x3c, 0xe9,
+	0x19, 0x55, 0x7a, 0x4d, 0x9f, 0xc2, 0xd6, 0x31, 0xca, 0xfb, 0x54, 0x4e, 0x19, 0x34, 0xa7, 0x3d,
+	0x72, 0x2f, 0x29, 0x4f, 0x2c, 0x29, 0xab, 0x47, 0x6b, 0x59, 0x2b, 0x0e, 0x33, 0x4e, 0x4d, 0x97,
+	0xa9, 0xbb, 0x01, 0x18, 0x62, 0xa3, 0xd6, 0x3a, 0x85, 0xd6, 0x96, 0x66, 0x5b, 0x5b, 0xb6, 0xad,
+	0x25, 0x4d, 0x58, 0x41, 0x1e, 0xc4, 0x82, 0x71, 0x69, 0xfa, 0x91, 0xef, 0xe9, 0xb7, 0x12, 0xd4,
+	0x4f, 0x06, 0xf2, 0x4d, 0xef, 0x3d, 0xfa, 0xb2, 0x78, 0x1a, 0x76, 0x01, 0x7a, 0x03, 0xff, 0x12,
+	0x25, 0xf7, 0xfa, 0x68, 0xb2, 0x5b, 0x88, 0x72, 0x60, 0x38, 0x0f, 0x6a, 0xa9, 0x9e, 0x88, 0x07,
+	0xbd, 0x88, 0xf9, 0x09, 0x7a, 0x81, 0x49, 0x6d, 0x21, 0xa4, 0x0d, 0xab, 0xbe, 0xe0, 0x12, 0xb9,
+	0x94, 0xd7, 0x31, 0x9a, 0x81, 0xb0, 0x21, 0x72, 0x00, 0x75, 0xb3, 0xed, 0x7b, 0x57, 0x11, 0xf2,
+	0x50, 0xbe, 0x73, 0x97, 0xda, 0xce, 0x7e, 0xb9, 0x3b, 0x81, 0x2b, 0xb6, 0x0b, 0x16, 0xa1, 0xc1,
+	0xdd, 0xe5, 0x8c, 0xcd, 0x82, 0x94, 0x1e, 0xbc, 0x8a, 0x59, 0x82, 0x92, 0xf5, 0xd1, 0x5d, 0xd1,
+	0x3c, 0x16, 0x42, 0x5f, 0xc3, 0x9a, 0xe5, 0xc5, 0xdc, 0x73, 0x77, 0x03, 0xf5, 0x63, 0x5c, 0x90,
+	0xb5, 0x63, 0xd6, 0x55, 0x26, 0xac, 0x53, 0xc5, 0x58, 0xd9, 0xe7, 0x2e, 0xe6, 0xab, 0x03, 0xad,
+	0x9c, 0xef, 0x24, 0xc1, 0x94, 0x85, 0x1c, 0x83, 0xb3, 0x24, 0x5a, 0xc0, 0xd0, 0x58, 0x4d, 0xaa,
+	0x4c, 0x34, 0xe9, 0x1c, 0x76, 0x66, 0xe8, 0x98, 0xbb, 0xc6, 0x3f, 0x0e, 0xb4, 0xf2, 0x01, 0x58,
+	0x70, 0x8d, 0xff, 0xf0, 0x62, 0x8c, 0x3a, 0xba, 0x3c, 0xcd, 0xd1, 0x19, 0x55, 0xcf, 0xeb, 0xe8,
+	0xd1, 0xaf, 0x2a, 0xfc, 0xaf, 0xdf, 0x9f, 0x2f, 0x62, 0x76, 0x8a, 0xc9, 0x47, 0xe6, 0x23, 0x39,
+	0x87, 0x5a, 0x9e, 0x8e, 0x3c, 0x30, 0xaf, 0xc5, 0xf1, 0x77, 0x50, 0xd3, 0x9d, 0x0c, 0x64, 0x6a,
+	0xe8, 0xd6, 0xed, 0xcf, 0xdf, 0xdf, 0x4b, 0xeb, 0xf4, 0xbf, 0x8e, 0xd0, 0x81, 0xce, 0x20, 0x8e,
+	0x84, 0x17, 0x3c, 0x77, 0x0e, 0xc8, 0x5b, 0xa8, 0xe5, 0xb3, 0x91, 0x53, 0x8f, 0xdf, 0xc1, 0x9c,
+	0x7a, 0xe2, 0x7a, 0xd0, 0x6d, 0x4d, 0xdd, 0xa0, 0xf5, 0x3b, 0xea, 0x40, 0x7c, 0xe2, 0x77, 0xe4,
+	0xb7, 0x0e, 0x34, 0xa6, 0x4e, 0x1e, 0x79, 0x34, 0x4e, 0x38, 0x65, 0x76, 0x9a, 0x8f, 0x8b, 0x0f,
+	0x19, 0x05, 0xbb, 0x5a, 0x81, 0x4b, 0xd7, 0xc7, 0x15, 0x0c, 0x92, 0x48, 0x89, 0xf8, 0xec, 0x40,
+	0x63, 0x6a, 0xb3, 0x72, 0x11, 0x45, 0x03, 0x9c, 0x8b, 0x28, 0xec, 0x37, 0x6d, 0x69, 0x11, 0x9b,
+	0x74, 0x6d, 0xd4, 0x61, 0x23, 0xe1, 0x8b, 0x03, 0x8d, 0xa9, 0x9f, 0xea, 0x5c, 0x42, 0xd1, 0x5f,
+	0x8d, 0x5c, 0x42, 0xe1, 0xd7, 0x9e, 0x3e, 0xd4, 0x12, 0xb6, 0xe8, 0x46, 0xc7, 0xd7, 0x27, 0x3a,
+	0xfa, 0xaa, 0x59, 0xad, 0xbe, 0x01, 0x32, 0xf9, 0x85, 0x26, 0xed, 0xa1, 0xc9, 0x33, 0xd2, 0xef,
+	0x15, 0x9c, 0x30, 0xb9, 0xf7, 0x74, 0xee, 0x6d, 0xba, 0x39, 0x9a, 0xdb, 0x9a, 0x85, 0xde, 0x92,
+	0x26, 0x79, 0xf6, 0x37, 0x00, 0x00, 0xff, 0xff, 0xf2, 0x42, 0x5e, 0xbb, 0x89, 0x09, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -617,6 +915,8 @@ type StoreApiServiceClient interface {
 	GetObject(ctx context.Context, in *GetObjectRequest, opts ...grpc.CallOption) (*GetObjectResponse, error)
 	GetObjectPresignedUrl(ctx context.Context, in *GetObjectPresignedUrlRequest, opts ...grpc.CallOption) (*GetObjectPresignedUrlResponse, error)
 	PutObjectPresignedUrl(ctx context.Context, in *PutObjectPresignedUrlRequest, opts ...grpc.CallOption) (*PutObjectPresignedUrlResponse, error)
+	UpdateConfigStoreInfo(ctx context.Context, in *UpdateConfigStoreInfoRequest, opts ...grpc.CallOption) (*UpdateConfigStoreInfoResponse, error)
+	GetConfigStoreInfo(ctx context.Context, in *GetConfigStoreInfoRequest, opts ...grpc.CallOption) (*GetConfigStoreInfoResponse, error)
 }
 
 type storeApiServiceClient struct {
@@ -663,12 +963,32 @@ func (c *storeApiServiceClient) PutObjectPresignedUrl(ctx context.Context, in *P
 	return out, nil
 }
 
+func (c *storeApiServiceClient) UpdateConfigStoreInfo(ctx context.Context, in *UpdateConfigStoreInfoRequest, opts ...grpc.CallOption) (*UpdateConfigStoreInfoResponse, error) {
+	out := new(UpdateConfigStoreInfoResponse)
+	err := c.cc.Invoke(ctx, "/proto.StoreApiService/UpdateConfigStoreInfo", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *storeApiServiceClient) GetConfigStoreInfo(ctx context.Context, in *GetConfigStoreInfoRequest, opts ...grpc.CallOption) (*GetConfigStoreInfoResponse, error) {
+	out := new(GetConfigStoreInfoResponse)
+	err := c.cc.Invoke(ctx, "/proto.StoreApiService/GetConfigStoreInfo", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // StoreApiServiceServer is the server API for StoreApiService service.
 type StoreApiServiceServer interface {
 	PutObject(context.Context, *PutObjectRequest) (*PutObjectResponse, error)
 	GetObject(context.Context, *GetObjectRequest) (*GetObjectResponse, error)
 	GetObjectPresignedUrl(context.Context, *GetObjectPresignedUrlRequest) (*GetObjectPresignedUrlResponse, error)
 	PutObjectPresignedUrl(context.Context, *PutObjectPresignedUrlRequest) (*PutObjectPresignedUrlResponse, error)
+	UpdateConfigStoreInfo(context.Context, *UpdateConfigStoreInfoRequest) (*UpdateConfigStoreInfoResponse, error)
+	GetConfigStoreInfo(context.Context, *GetConfigStoreInfoRequest) (*GetConfigStoreInfoResponse, error)
 }
 
 func RegisterStoreApiServiceServer(s *grpc.Server, srv StoreApiServiceServer) {
@@ -747,6 +1067,42 @@ func _StoreApiService_PutObjectPresignedUrl_Handler(srv interface{}, ctx context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _StoreApiService_UpdateConfigStoreInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateConfigStoreInfoRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StoreApiServiceServer).UpdateConfigStoreInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/proto.StoreApiService/UpdateConfigStoreInfo",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StoreApiServiceServer).UpdateConfigStoreInfo(ctx, req.(*UpdateConfigStoreInfoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _StoreApiService_GetConfigStoreInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetConfigStoreInfoRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StoreApiServiceServer).GetConfigStoreInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/proto.StoreApiService/GetConfigStoreInfo",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StoreApiServiceServer).GetConfigStoreInfo(ctx, req.(*GetConfigStoreInfoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _StoreApiService_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "proto.StoreApiService",
 	HandlerType: (*StoreApiServiceServer)(nil),
@@ -766,6 +1122,14 @@ var _StoreApiService_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "PutObjectPresignedUrl",
 			Handler:    _StoreApiService_PutObjectPresignedUrl_Handler,
+		},
+		{
+			MethodName: "UpdateConfigStoreInfo",
+			Handler:    _StoreApiService_UpdateConfigStoreInfo_Handler,
+		},
+		{
+			MethodName: "GetConfigStoreInfo",
+			Handler:    _StoreApiService_GetConfigStoreInfo_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

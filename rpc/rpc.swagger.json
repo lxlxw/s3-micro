@@ -15,6 +15,58 @@
     "application/json"
   ],
   "paths": {
+    "/config/store/download": {
+      "post": {
+        "operationId": "GetConfigStoreInfo",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/protoGetConfigStoreInfoResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/protoGetConfigStoreInfoRequest"
+            }
+          }
+        ],
+        "tags": [
+          "StoreApiService"
+        ]
+      }
+    },
+    "/config/store/upload": {
+      "post": {
+        "operationId": "UpdateConfigStoreInfo",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/protoUpdateConfigStoreInfoResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/protoUpdateConfigStoreInfoRequest"
+            }
+          }
+        ],
+        "tags": [
+          "StoreApiService"
+        ]
+      }
+    },
     "/object/download": {
       "post": {
         "operationId": "GetObject",
@@ -121,6 +173,46 @@
     }
   },
   "definitions": {
+    "protoConfigInfo": {
+      "type": "object",
+      "properties": {
+        "accesskey": {
+          "type": "string"
+        },
+        "secretkey": {
+          "type": "string"
+        },
+        "region": {
+          "type": "string"
+        },
+        "endpoint": {
+          "type": "string"
+        }
+      }
+    },
+    "protoGetConfigStoreInfoRequest": {
+      "type": "object",
+      "properties": {
+        "store": {
+          "type": "string"
+        }
+      }
+    },
+    "protoGetConfigStoreInfoResponse": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "msg": {
+          "type": "string"
+        },
+        "data": {
+          "$ref": "#/definitions/protoConfigInfo"
+        }
+      }
+    },
     "protoGetObjectPresignedUrlRequest": {
       "type": "object",
       "properties": {
@@ -261,6 +353,41 @@
       }
     },
     "protoPutObjectResponse": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "msg": {
+          "type": "string"
+        },
+        "data": {
+          "type": "string"
+        }
+      }
+    },
+    "protoUpdateConfigStoreInfoRequest": {
+      "type": "object",
+      "properties": {
+        "store": {
+          "type": "string"
+        },
+        "domain": {
+          "type": "string"
+        },
+        "accesskey": {
+          "type": "string"
+        },
+        "secretkey": {
+          "type": "string"
+        },
+        "region": {
+          "type": "string"
+        }
+      }
+    },
+    "protoUpdateConfigStoreInfoResponse": {
       "type": "object",
       "properties": {
         "code": {

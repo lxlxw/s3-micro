@@ -1,8 +1,6 @@
 package service
 
 import (
-	"github.com/ks3sdklib/aws-sdk-go/aws/awserr"
-
 	ws3 "wps_store/pkg/s3"
 
 	pb "wps_store/rpc"
@@ -18,23 +16,25 @@ func PutObject(r *pb.PutObjectRequest) pb.PutObjectResponse {
 	//TODO: 要处理下key， 拆分. 然后将keyname做成文件目录
 
 	//判断文件是否存在
-	objectExist := client.HeadObject(r.Bucketname, r.Key)
+	objectExist, exErr := client.HeadObject(r.Bucketname, r.Key)
+	if exErr != nil {
+		return pb.PutObjectResponse{Msg: exErr.Error(), Code: 403}
+	}
 	if objectExist == true {
-		url, err := client.GetObjectPresignedUrl(r.Bucketname, r.Key, r.Expiretime)
-		if err == nil {
-			return pb.PutObjectResponse{Msg: "success", Code: 200, Data: url}
+		url, getErr := client.GetObjectPresignedUrl(r.Bucketname, r.Key, r.Expiretime)
+		if getErr != nil {
+			return pb.PutObjectResponse{Msg: getErr.Error(), Code: 403}
 		}
+		return pb.PutObjectResponse{Msg: "success", Code: 200, Data: url}
+	}
+	putErr := client.PutObject(r.Bucketname, r.Key, r.Filecontent, r.Contenttype, r.Publicread, r.Contentmaxlength, r.Expiretime)
+	if putErr != nil {
+		return pb.PutObjectResponse{Msg: putErr.Error(), Code: 403}
 	}
 
-	err := client.PutObject(r.Bucketname, r.Key, r.Filecontent, r.Contenttype, r.Publicread, r.Contentmaxlength, r.Expiretime)
-	if reqErr, ok := err.(awserr.RequestFailure); ok {
-		return pb.PutObjectResponse{Msg: err.(awserr.Error).Code(), Code: int32(reqErr.StatusCode())}
-	}
-	url, err := client.GetObjectPresignedUrl(r.Bucketname, r.Key, r.Expiretime)
-	if err != nil {
-		if reqErr, ok := err.(awserr.RequestFailure); ok {
-			return pb.PutObjectResponse{Msg: err.(awserr.Error).Code(), Code: int32(reqErr.StatusCode())}
-		}
+	url, getpErr := client.GetObjectPresignedUrl(r.Bucketname, r.Key, r.Expiretime)
+	if getpErr != nil {
+		return pb.PutObjectResponse{Msg: getpErr.Error(), Code: 403}
 	}
 	return pb.PutObjectResponse{Msg: "success", Code: 200, Data: url}
 }
@@ -47,8 +47,8 @@ func GetObject(r *pb.GetObjectRequest) pb.GetObjectResponse {
 	client, _ := ws3.New(r.Store)
 
 	resBody, err := client.GetObject(r.Bucketname, r.Key, r.Contenttype)
-	if reqErr, ok := err.(awserr.RequestFailure); ok {
-		return pb.GetObjectResponse{Msg: err.(awserr.Error).Code(), Code: int32(reqErr.StatusCode())}
+	if err != nil {
+		return pb.GetObjectResponse{Msg: err.Error(), Code: 403}
 	}
 	return pb.GetObjectResponse{Msg: "success", Code: 200, Data: resBody}
 }
@@ -61,8 +61,8 @@ func GetObjectPresignedUrl(r *pb.GetObjectPresignedUrlRequest) pb.GetObjectPresi
 	client, _ := ws3.New(r.Store)
 
 	url, err := client.GetObjectPresignedUrl(r.Bucketname, r.Key, r.Expiretime)
-	if reqErr, ok := err.(awserr.RequestFailure); ok {
-		return pb.GetObjectPresignedUrlResponse{Msg: err.(awserr.Error).Code(), Code: int32(reqErr.StatusCode())}
+	if err != nil {
+		return pb.GetObjectPresignedUrlResponse{Msg: err.Error(), Code: 403}
 	}
 	return pb.GetObjectPresignedUrlResponse{Msg: "success", Code: 200, Data: url}
 }
@@ -75,8 +75,8 @@ func PutObjectPresignedUrl(r *pb.PutObjectPresignedUrlRequest) pb.PutObjectPresi
 	client, _ := ws3.New(r.Store)
 
 	presignedUrl, err := client.PutObjectPresignedUrl(r.Bucketname, r.Key, r.Contenttype, r.Publicread, r.Contentmaxlength, r.Expiretime)
-	if reqErr, ok := err.(awserr.RequestFailure); ok {
-		return pb.PutObjectPresignedUrlResponse{Msg: err.(awserr.Error).Code(), Code: int32(reqErr.StatusCode())}
+	if err != nil {
+		return pb.PutObjectPresignedUrlResponse{Msg: err.Error(), Code: 403}
 	}
 	return pb.PutObjectPresignedUrlResponse{Msg: "success", Code: 200, Data: presignedUrl}
 }
