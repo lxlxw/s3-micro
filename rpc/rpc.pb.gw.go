@@ -28,6 +28,19 @@ var _ status.Status
 var _ = runtime.String
 var _ = utilities.NewDoubleArray
 
+func request_StoreApiService_CreateBucket_0(ctx context.Context, marshaler runtime.Marshaler, client StoreApiServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq CreateBucketRequest
+	var metadata runtime.ServerMetadata
+
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
+	msg, err := client.CreateBucket(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	return msg, metadata, err
+
+}
+
 func request_StoreApiService_PutObject_0(ctx context.Context, marshaler runtime.Marshaler, client StoreApiServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq PutObjectRequest
 	var metadata runtime.ServerMetadata
@@ -93,11 +106,15 @@ func request_StoreApiService_UpdateConfigStoreInfo_0(ctx context.Context, marsha
 
 }
 
+var (
+	filter_StoreApiService_GetConfigStoreInfo_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
+)
+
 func request_StoreApiService_GetConfigStoreInfo_0(ctx context.Context, marshaler runtime.Marshaler, client StoreApiServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq GetConfigStoreInfoRequest
 	var metadata runtime.ServerMetadata
 
-	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
+	if err := runtime.PopulateQueryParameters(&protoReq, req.URL.Query(), filter_StoreApiService_GetConfigStoreInfo_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -143,6 +160,35 @@ func RegisterStoreApiServiceHandler(ctx context.Context, mux *runtime.ServeMux, 
 // doesn't go through the normal gRPC flow (creating a gRPC client etc.) then it will be up to the passed in
 // "StoreApiServiceClient" to call the correct interceptors.
 func RegisterStoreApiServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux, client StoreApiServiceClient) error {
+
+	mux.Handle("POST", pattern_StoreApiService_CreateBucket_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		if cn, ok := w.(http.CloseNotifier); ok {
+			go func(done <-chan struct{}, closed <-chan bool) {
+				select {
+				case <-done:
+				case <-closed:
+					cancel()
+				}
+			}(ctx.Done(), cn.CloseNotify())
+		}
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		rctx, err := runtime.AnnotateContext(ctx, mux, req)
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_StoreApiService_CreateBucket_0(rctx, inboundMarshaler, client, req, pathParams)
+		ctx = runtime.NewServerMetadataContext(ctx, md)
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_StoreApiService_CreateBucket_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
+	})
 
 	mux.Handle("POST", pattern_StoreApiService_PutObject_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
@@ -289,7 +335,7 @@ func RegisterStoreApiServiceHandlerClient(ctx context.Context, mux *runtime.Serv
 
 	})
 
-	mux.Handle("POST", pattern_StoreApiService_GetConfigStoreInfo_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_StoreApiService_GetConfigStoreInfo_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		if cn, ok := w.(http.CloseNotifier); ok {
@@ -322,6 +368,8 @@ func RegisterStoreApiServiceHandlerClient(ctx context.Context, mux *runtime.Serv
 }
 
 var (
+	pattern_StoreApiService_CreateBucket_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"bucket", "create"}, ""))
+
 	pattern_StoreApiService_PutObject_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"object", "upload"}, ""))
 
 	pattern_StoreApiService_GetObject_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"object", "download"}, ""))
@@ -336,6 +384,8 @@ var (
 )
 
 var (
+	forward_StoreApiService_CreateBucket_0 = runtime.ForwardResponseMessage
+
 	forward_StoreApiService_PutObject_0 = runtime.ForwardResponseMessage
 
 	forward_StoreApiService_GetObject_0 = runtime.ForwardResponseMessage

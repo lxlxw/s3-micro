@@ -5,6 +5,12 @@ package proto;
 import "google/api/annotations.proto";
 
 service StoreApiService {
+	rpc CreateBucket(CreateBucketRequest) returns (CreateBucketResponse) {
+		option (google.api.http) = {
+			post: "/bucket/create"
+            body: "*"
+		};
+	}
 	rpc PutObject(PutObjectRequest) returns (PutObjectResponse) {
 		option (google.api.http) = {
 			post: "/object/upload"
@@ -43,9 +49,20 @@ service StoreApiService {
 	rpc GetConfigStoreInfo(GetConfigStoreInfoRequest) returns (GetConfigStoreInfoResponse) {
 		option (google.api.http) = {
 			get: "/config/store/download"
-			body: "*"
 		};
 	}
+}
+
+message CreateBucketRequest {
+	string store = 1;
+	string bucketname = 2;
+	string publicread = 4;
+}
+
+message CreateBucketResponse {
+	int32 code = 1;
+	string msg = 2;
+    string data = 3;  
 }
 
 message PutObjectRequest {

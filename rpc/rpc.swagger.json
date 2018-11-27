@@ -15,8 +15,34 @@
     "application/json"
   ],
   "paths": {
-    "/config/store/download": {
+    "/bucket/create": {
       "post": {
+        "operationId": "CreateBucket",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/protoCreateBucketResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/protoCreateBucketRequest"
+            }
+          }
+        ],
+        "tags": [
+          "StoreApiService"
+        ]
+      }
+    },
+    "/config/store/download": {
+      "get": {
         "operationId": "GetConfigStoreInfo",
         "responses": {
           "200": {
@@ -28,12 +54,10 @@
         },
         "parameters": [
           {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/protoGetConfigStoreInfoRequest"
-            }
+            "name": "store",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [
@@ -190,10 +214,31 @@
         }
       }
     },
-    "protoGetConfigStoreInfoRequest": {
+    "protoCreateBucketRequest": {
       "type": "object",
       "properties": {
         "store": {
+          "type": "string"
+        },
+        "bucketname": {
+          "type": "string"
+        },
+        "publicread": {
+          "type": "string"
+        }
+      }
+    },
+    "protoCreateBucketResponse": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "msg": {
+          "type": "string"
+        },
+        "data": {
           "type": "string"
         }
       }
