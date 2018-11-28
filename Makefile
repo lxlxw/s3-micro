@@ -11,6 +11,7 @@ endif
 
 # dev test online
 PROJECTENV=dev
+PROJECTNAME=wps_store
 
 #BUILD_FLAGS := -ldflags "-X v1.0"
 
@@ -18,40 +19,47 @@ env:
 	@echo "Building project env"
 	export GOENV=$(PROJECTENV)
 
-rpc:
+grpc:
 	@echo "Building golang grpc server"
 	@cd rpc
-
-	@echo "Building google.api"
-	protoc -I . --go_out=plugins=grpc,Mgoogle/protobuf/descriptor.proto=github.com/golang/protobuf/protoc-gen-go/descriptor:. google/api/*.proto
 
 	@echo "Building rpc.pb.proto"
 	protoc -I/usr/local/include -I. \
 	-I$(GOPATH)/src \-I$(GOPATH)/src/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis \
-	--go_out=plugins=grpc,Mgoogle/api/annotations.proto=wps_store/rpc/google/api:. \
-	rpc.proto
+	--go_out=plugins=grpc,Mgoogle/api/annotations.proto=$(PROJECTNAME)/rpc/google/api:. \
+	./rpc/rpc.proto
 
 	@echo "Building rpc.pb.gw.proto"
 	protoc -I/usr/local/include -I. \
 	-I$(GOPATH)/src \-I$(GOPATH)/src/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis \
 	--grpc-gateway_out=logtostderr=true:. \
-	rpc.proto
+	./rpc/rpc.proto
 
 	@echo "Building swagger.json"
 	protoc -I/usr/local/include -I. \
 	-I$(GOPATH)/src  -I$(GOPATH)/src/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis \
 	--swagger_out=logtostderr=true:. \
-	rpc.proto
+	./rpc/rpc.proto
 
-build : server http-server
+	@echo "Success!"
+
+build : 
+	@echo "Building micro store"
+	@go build
 
 server:
-	@echo "Building micro store to cmd/server"
+	@echo "Running micro store to cmd/server"
+	@./$(PROJECTNAME) server
 
-http-server:
-	@echo "Building micro to cmd/server_http"
+http:
+	@echo "Running micro store to cmd/server_http"
+	@./$(PROJECTNAME) http
 
 clean:
 	@echo "Cleaning binaries built"
-	@rm -f cmd/server
-	@rm -f cmd/server_http
+	@rm -f $(PROJECTNAME)
+	@rm -f rpc/google/api/annotations.pb.go
+	@rm -f rpc/google/api/http.pb.go
+	@rm -f rpc/rpc.pb.go
+	@rm -f rpc/rpc.pb.gw.go
+	@rm -f rpc/rpc.swagger.json

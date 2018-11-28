@@ -6,7 +6,7 @@ import (
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 
-	pb "wps_store/proto"
+	pb "wps_store/rpc"
 )
 
 func main() {
@@ -22,13 +22,13 @@ func main() {
 	c := pb.NewStoreApiServiceClient(conn)
 
 	// 调用方法
-	req := &pb.StoreApiRequest{Referer: "gRPC"}
-	res, err := c.ChainUpload(context.Background(), req)
+	req := &pb.GetConfigStoreInfoRequest{Store: "ks3"}
+	res, err := c.GetConfigStoreInfo(context.Background(), req)
 
 	if err != nil {
 		log.Println(err)
 	}
 
-	log.Println(res.Message)
+	log.Println(res.Data)
 
 }
