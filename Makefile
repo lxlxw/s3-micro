@@ -63,3 +63,8 @@ clean:
 	@rm -f rpc/rpc.pb.go
 	@rm -f rpc/rpc.pb.gw.go
 	@rm -f rpc/rpc.swagger.json
+
+swagger:
+	@echo "Building pkg/swagger/swagger.go"
+	@go-bindata --nocompress -pkg swagger -o pkg/swagger/swagger.go swagger-ui/
+
