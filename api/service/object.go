@@ -13,8 +13,6 @@ import (
 func PutObject(r *pb.PutObjectRequest) pb.PutObjectResponse {
 	client, _ := ws3.New(r.Store)
 
-	//TODO: 要处理下key， 拆分. 然后将keyname做成文件目录
-
 	//判断文件是否存在
 	objectExist, exErr := client.HeadObject(r.Bucketname, r.Key)
 	if exErr != nil {

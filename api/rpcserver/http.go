@@ -1,4 +1,4 @@
-package server_http
+package rpcserver
 
 import (
 	"log"
@@ -13,13 +13,11 @@ import (
 )
 
 var (
-	ServerPort     string
 	ServerHttpPort string
-	EndPoint       string
 	HttpEndPoint   string
 )
 
-func Run() (err error) {
+func RunHttpServer() (err error) {
 	ctx := context.Background()
 	ctx, cancel := context.WithCancel(ctx)
 	defer cancel()

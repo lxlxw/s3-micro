@@ -5,7 +5,7 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"wps_store/rpc/server"
+	"wps_store/api/rpcserver"
 )
 
 var serverCmd = &cobra.Command{
@@ -18,11 +18,11 @@ var serverCmd = &cobra.Command{
 			}
 		}()
 
-		server.Run()
+		rpcserver.RunServer()
 	},
 }
 
 func init() {
-	serverCmd.Flags().StringVarP(&server.ServerPort, "port", "p", "50052", "server port")
+	serverCmd.Flags().StringVarP(&rpcserver.ServerPort, "port", "p", "50052", "server port")
 	rootCmd.AddCommand(serverCmd)
 }

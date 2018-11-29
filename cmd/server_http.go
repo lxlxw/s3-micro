@@ -2,10 +2,9 @@ package cmd
 
 import (
 	"log"
+	"wps_store/api/rpcserver"
 
 	"github.com/spf13/cobra"
-
-	"wps_store/rpc/server_http"
 )
 
 var serverHttpCmd = &cobra.Command{
@@ -18,13 +17,13 @@ var serverHttpCmd = &cobra.Command{
 			}
 		}()
 
-		server_http.Run()
+		rpcserver.RunHttpServer()
 	},
 }
 
 func init() {
-	serverHttpCmd.Flags().StringVarP(&server_http.ServerPort, "server-port", "p", "50052", "server port")
-	serverHttpCmd.Flags().StringVarP(&server_http.ServerHttpPort, "http-port", "u", "8088", "http server port")
+	serverHttpCmd.Flags().StringVarP(&rpcserver.ServerPort, "server-port", "p", "50052", "server port")
+	serverHttpCmd.Flags().StringVarP(&rpcserver.ServerHttpPort, "http-port", "u", "8088", "http server port")
 
 	rootCmd.AddCommand(serverHttpCmd)
 }
