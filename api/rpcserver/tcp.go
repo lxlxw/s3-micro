@@ -1,6 +1,7 @@
 package rpcserver
 
 import (
+	"context"
 	"log"
 	"net"
 
@@ -8,6 +9,7 @@ import (
 	"google.golang.org/grpc/reflection"
 
 	"wps_store/api/controller"
+	"wps_store/api/middleware"
 	pb "wps_store/rpc"
 )
 
@@ -36,11 +38,28 @@ func RunServer() (err error) {
 	if err != nil {
 		log.Fatalf("Grpc服务启动失败: %v", err)
 	}
-	s := grpc.NewServer()
+	// 注册interceptor
+	s := grpc.NewServer(grpc.UnaryInterceptor(UnaryInterceptorChain(middleware.Recovery, middleware.Logging)))
 	pb.RegisterStoreApiServiceServer(s, NewStoreApiService())
 	reflection.Register(s)
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("Grpc服务启动失败: %v", err)
 	}
 	return err
+}
+
+func UnaryInterceptorChain(interceptors ...grpc.UnaryServerInterceptor) grpc.UnaryServerInterceptor {
+	return func(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (resp interface{}, err error) {
+		chain := handler
+		for i := len(interceptors) - 1; i >= 0; i-- {
+			chain = build(interceptors[i], chain, info)
+		}
+		return chain(ctx, req)
+	}
+}
+
+func build(c grpc.UnaryServerInterceptor, n grpc.UnaryHandler, info *grpc.UnaryServerInfo) grpc.UnaryHandler {
+	return func(ctx context.Context, req interface{}) (interface{}, error) {
+		return c(ctx, req, info, n)
+	}
 }
