@@ -36,7 +36,7 @@ func New(store string) (*S3, error) {
 }
 
 func GetS3Conf(store string) S3Conf {
-	util.SetConfig()
+	util.SetConfig(S3_CONF_FILENNAME)
 	s3Conf := S3Conf{}
 	ks3 := util.GetConfig().Ks3
 	as3 := util.GetConfig().As3

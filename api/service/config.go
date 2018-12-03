@@ -16,7 +16,7 @@ func UpdateConfigStoreInfo(r *pb.UpdateConfigStoreInfoRequest) pb.UpdateConfigSt
 	if err != nil {
 		return pb.UpdateConfigStoreInfoResponse{Msg: err.Error(), Code: 403}
 	}
-	fileErr := util.UpdateConfigFile(fileString)
+	fileErr := util.UpdateConfigFile(fileString, s3.S3_CONF_FILENNAME)
 	if fileErr != nil {
 		return pb.UpdateConfigStoreInfoResponse{Msg: err.Error(), Code: 403}
 	}

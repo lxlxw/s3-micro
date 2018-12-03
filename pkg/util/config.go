@@ -62,18 +62,7 @@ func GetConfig() Config {
 }
 
 // 生效配置文件
-func SetConfig() {
-	goEnv := os.Getenv("GOENV")
-	switch goEnv {
-	case "dev":
-		confName = "app_dev.conf"
-	case "test":
-		confName = "app_test.conf"
-	case "online":
-		confName = "app_online.conf"
-	default:
-		confName = "app_dev.conf"
-	}
+func SetConfig(confName string) {
 	configFile := GetConfigPath(confName)
 	ParseConfigFile(configFile)
 }

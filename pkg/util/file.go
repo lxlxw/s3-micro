@@ -33,10 +33,9 @@ func GetConfigPath(confName string) string {
 }
 
 // 更新配置文件
-func UpdateConfigFile(fileContent string) error {
+func UpdateConfigFile(fileContent, fileName string) error {
 
-	//TODO: update type conf
-	pathFile := GetConfigPath("app_online.conf")
+	pathFile := GetConfigPath(fileName)
 
 	exist, err := PathExists(pathFile)
 	if err != nil {
