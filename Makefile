@@ -9,16 +9,10 @@ $(error "$$GOOS is not defined. If you are using Windows, try to re-make using '
 endif
 endif
 
-# dev test online
-PROJECTENV=dev
-PROJECTNAME=wps_store
+PROJECTNAME=micro-s3-grpc
 
-#BUILD_FLAGS := -ldflags "-X v1.0"
-
-env:
-	@echo "Building project env"
-	export GOENV=$(PROJECTENV)
-
+all: build
+	
 grpc:
 	@echo "Building golang grpc server"
 	@cd rpc
