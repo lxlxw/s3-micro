@@ -6,7 +6,7 @@ import (
 	"os"
 	"runtime"
 
-	"github.com/BurntSushi/toml"
+	"github.com/lxlxw/toml"
 )
 
 type (
