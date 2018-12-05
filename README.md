@@ -19,7 +19,6 @@ This project is an upload and download micro service of Amazon S3 and KS3.
 - [Contact](#contact)
 - [License](#license)
 
-## 相关链接
 
 ## Installation
 Use go get to retrieve the project to add it to your GOPATH workspace, or project's Go module dependencies.
