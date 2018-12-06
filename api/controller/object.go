@@ -3,9 +3,9 @@ package controller
 import (
 	"golang.org/x/net/context"
 
-	"wps_store/api/service"
+	"github.com/lxlxw/s3-micro/api/service"
 
-	pb "wps_store/rpc"
+	pb "github.com/lxlxw/s3-micro/proto"
 )
 
 func (h ApiService) PutObject(ctx context.Context, r *pb.PutObjectRequest) (*pb.PutObjectResponse, error) {

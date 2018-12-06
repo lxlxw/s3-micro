@@ -2,7 +2,8 @@ package main
 
 import (
 	"runtime"
-	"wps_store/cmd"
+
+	"github.com/lxlxw/s3-micro/cmd"
 )
 
 func main() {

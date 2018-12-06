@@ -9,33 +9,30 @@ $(error "$$GOOS is not defined. If you are using Windows, try to re-make using '
 endif
 endif
 
-PROJECTNAME=micro-s3-grpc
+PROJECTNAME=s3-micro
 
 all: build
 	
 grpc:
 	@echo "Building golang grpc server"
-	@cd rpc
 
 	@echo "Building rpc.pb.proto"
 	protoc -I/usr/local/include -I. \
 	-I$(GOPATH)/src \-I$(GOPATH)/src/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis \
-	--go_out=plugins=grpc,Mgoogle/api/annotations.proto=$(PROJECTNAME)/rpc/google/api:. \
-	./rpc/rpc.proto
+	--go_out=plugins=grpc,Mgoogle/api/annotations.proto=$(PROJECTNAME)/proto/google/api:. \
+	./proto/rpc.proto
 
 	@echo "Building rpc.pb.gw.proto"
 	protoc -I/usr/local/include -I. \
 	-I$(GOPATH)/src \-I$(GOPATH)/src/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis \
 	--grpc-gateway_out=logtostderr=true:. \
-	./rpc/rpc.proto
+	./proto/rpc.proto
 
 	@echo "Building swagger.json"
 	protoc -I/usr/local/include -I. \
 	-I$(GOPATH)/src  -I$(GOPATH)/src/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis \
 	--swagger_out=logtostderr=true:. \
-	./rpc/rpc.proto
-
-	@echo "Success!"
+	./proto/rpc.proto
 
 build : 
 	@echo "Building micro store"
@@ -52,11 +49,11 @@ http:
 clean:
 	@echo "Cleaning binaries built"
 	@rm -f $(PROJECTNAME)
-	@rm -f rpc/google/api/annotations.pb.go
-	@rm -f rpc/google/api/http.pb.go
-	@rm -f rpc/rpc.pb.go
-	@rm -f rpc/rpc.pb.gw.go
-	@rm -f rpc/rpc.swagger.json
+	@rm -f proto/google/api/annotations.pb.go
+	@rm -f proto/google/api/http.pb.go
+	@rm -f proto/rpc.pb.go
+	@rm -f proto/rpc.pb.gw.go
+	@rm -f proto/rpc.swagger.json
 
 swagger:
 	@echo "Building pkg/swagger/swagger.go"

@@ -6,22 +6,22 @@ import (
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 
-	pb "wps_store/rpc"
+	pb "github.com/lxlxw/s3-micro/proto"
 )
 
 func main() {
 
-	// 连接
+	// conn
 	conn, err := grpc.Dial(":50052", grpc.WithInsecure())
 	if err != nil {
 		log.Println(err)
 	}
 	defer conn.Close()
 
-	// 初始化客户端
+	// new client
 	c := pb.NewStoreApiServiceClient(conn)
 
-	// 调用方法
+	// call method
 	req := &pb.GetConfigStoreInfoRequest{Store: "ks3"}
 	res, err := c.GetConfigStoreInfo(context.Background(), req)
 

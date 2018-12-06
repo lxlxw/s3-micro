@@ -8,9 +8,9 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 
-	"wps_store/api/controller"
-	"wps_store/api/middleware"
-	pb "wps_store/rpc"
+	"github.com/lxlxw/s3-micro/api/controller"
+	"github.com/lxlxw/s3-micro/api/middleware"
+	pb "github.com/lxlxw/s3-micro/proto"
 )
 
 var (

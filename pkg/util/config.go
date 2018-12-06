@@ -11,18 +11,10 @@ import (
 
 type (
 	Config struct {
-		Ks3 Ks3Config
-		As3 As3Config
+		S3 S3Config
 	}
 
-	Ks3Config struct {
-		AccessKey string `toml:"accesskey"`
-		Secretkey string `toml:"secretkey"`
-		Region    string `toml:"region"`
-		Endpoint  string `toml:"endpoint"`
-	}
-
-	As3Config struct {
+	S3Config struct {
 		AccessKey string `toml:"accesskey"`
 		Secretkey string `toml:"secretkey"`
 		Region    string `toml:"region"`

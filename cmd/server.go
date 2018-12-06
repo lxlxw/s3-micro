@@ -5,7 +5,7 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"wps_store/api/rpcserver"
+	"github.com/lxlxw/s3-micro/api/rpcserver"
 )
 
 var serverCmd = &cobra.Command{

@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "rpc/rpc.proto",
+    "title": "proto/rpc.proto",
     "version": "version not set"
   },
   "schemes": [
@@ -41,7 +41,7 @@
         ]
       }
     },
-    "/config/store/download": {
+    "/config/download": {
       "get": {
         "operationId": "GetConfigStoreInfo",
         "responses": {
@@ -52,20 +52,12 @@
             }
           }
         },
-        "parameters": [
-          {
-            "name": "store",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          }
-        ],
         "tags": [
           "StoreApiService"
         ]
       }
     },
-    "/config/store/upload": {
+    "/config/upload": {
       "post": {
         "operationId": "UpdateConfigStoreInfo",
         "responses": {
@@ -217,9 +209,6 @@
     "protoCreateBucketRequest": {
       "type": "object",
       "properties": {
-        "store": {
-          "type": "string"
-        },
         "bucketname": {
           "type": "string"
         },
@@ -261,9 +250,6 @@
     "protoGetObjectPresignedUrlRequest": {
       "type": "object",
       "properties": {
-        "store": {
-          "type": "string"
-        },
         "bucketname": {
           "type": "string"
         },
@@ -294,9 +280,6 @@
     "protoGetObjectRequest": {
       "type": "object",
       "properties": {
-        "store": {
-          "type": "string"
-        },
         "bucketname": {
           "type": "string"
         },
@@ -326,9 +309,6 @@
     "protoPutObjectPresignedUrlRequest": {
       "type": "object",
       "properties": {
-        "store": {
-          "type": "string"
-        },
         "bucketname": {
           "type": "string"
         },
@@ -369,9 +349,6 @@
     "protoPutObjectRequest": {
       "type": "object",
       "properties": {
-        "store": {
-          "type": "string"
-        },
         "bucketname": {
           "type": "string"
         },
@@ -415,9 +392,6 @@
     "protoUpdateConfigStoreInfoRequest": {
       "type": "object",
       "properties": {
-        "store": {
-          "type": "string"
-        },
         "domain": {
           "type": "string"
         },

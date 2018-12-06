@@ -1,9 +1,9 @@
 package service
 
 import (
-	"wps_store/pkg/s3"
-	"wps_store/pkg/util"
-	pb "wps_store/rpc"
+	"github.com/lxlxw/s3-micro/pkg/s3"
+	"github.com/lxlxw/s3-micro/pkg/util"
+	pb "github.com/lxlxw/s3-micro/proto"
 )
 
 /*
@@ -11,8 +11,17 @@ import (
 *
  */
 func UpdateConfigStoreInfo(r *pb.UpdateConfigStoreInfoRequest) pb.UpdateConfigStoreInfoResponse {
-	conf := getS3Conf(r)
-	fileString, err := util.EncodeConfig(&conf)
+
+	s3Conf := util.Config{
+		S3: util.S3Config{
+			AccessKey: r.Accesskey,
+			Secretkey: r.Secretkey,
+			Region:    r.Region,
+			Endpoint:  r.Domain,
+		},
+	}
+
+	fileString, err := util.EncodeConfig(&s3Conf)
 	if err != nil {
 		return pb.UpdateConfigStoreInfoResponse{Msg: err.Error(), Code: 403}
 	}
@@ -28,7 +37,7 @@ func UpdateConfigStoreInfo(r *pb.UpdateConfigStoreInfoRequest) pb.UpdateConfigSt
 *
  */
 func GetConfigStoreInfo(r *pb.GetConfigStoreInfoRequest) pb.GetConfigStoreInfoResponse {
-	conf := s3.GetS3Conf(r.Store)
+	conf := s3.GetS3Conf()
 
 	confInfo := &pb.ConfigInfo{
 		Accesskey: conf.AccessKey,
@@ -37,31 +46,4 @@ func GetConfigStoreInfo(r *pb.GetConfigStoreInfoRequest) pb.GetConfigStoreInfoRe
 		Endpoint:  conf.Endpoint,
 	}
 	return pb.GetConfigStoreInfoResponse{Msg: "success", Code: 200, Data: confInfo}
-}
-
-/*
-*  获取需要更新的配置信息
-*
- */
-func getS3Conf(r *pb.UpdateConfigStoreInfoRequest) util.Config {
-
-	Ks3Conf := util.Ks3Config{}
-	As3Conf := util.As3Config{}
-
-	switch r.Store {
-	case s3.StoreAs3:
-		ks3 := s3.GetS3Conf(s3.StoreKs3)
-		Ks3Conf = util.Ks3Config{AccessKey: ks3.AccessKey, Secretkey: ks3.Secretkey, Region: ks3.Region, Endpoint: ks3.Endpoint}
-		As3Conf = util.As3Config{AccessKey: r.Accesskey, Secretkey: r.Secretkey, Region: r.Region, Endpoint: r.Domain}
-	case s3.StoreKs3:
-		as3 := s3.GetS3Conf(s3.StoreAs3)
-		As3Conf = util.As3Config{AccessKey: as3.AccessKey, Secretkey: as3.Secretkey, Region: as3.Region, Endpoint: as3.Endpoint}
-		Ks3Conf = util.Ks3Config{AccessKey: r.Accesskey, Secretkey: r.Secretkey, Region: r.Region, Endpoint: r.Domain}
-	default:
-		//default update ks3
-		as3 := s3.GetS3Conf(s3.StoreAs3)
-		As3Conf = util.As3Config{AccessKey: as3.AccessKey, Secretkey: as3.Secretkey, Region: as3.Region, Endpoint: as3.Endpoint}
-		Ks3Conf = util.Ks3Config{AccessKey: r.Accesskey, Secretkey: r.Secretkey, Region: r.Region, Endpoint: r.Domain}
-	}
-	return util.Config{Ks3: Ks3Conf, As3: As3Conf}
 }

@@ -5,7 +5,7 @@ import (
 	"github.com/ks3sdklib/aws-sdk-go/aws/credentials"
 	"github.com/ks3sdklib/aws-sdk-go/service/s3"
 
-	"wps_store/pkg/util"
+	"github.com/lxlxw/s3-micro/pkg/util"
 )
 
 type S3 struct {
@@ -19,8 +19,8 @@ type S3Conf struct {
 	Endpoint  string
 }
 
-func New(store string) (*S3, error) {
-	conf := GetS3Conf(store)
+func New() (*S3, error) {
+	conf := GetS3Conf()
 
 	credentials := credentials.NewStaticCredentials(conf.AccessKey, conf.Secretkey, "")
 	client := s3.New(&aws.Config{
@@ -35,19 +35,15 @@ func New(store string) (*S3, error) {
 	return &S3{S3: client}, nil
 }
 
-func GetS3Conf(store string) S3Conf {
+func GetS3Conf() S3Conf {
 	util.SetConfig(S3_CONF_FILENNAME)
-	s3Conf := S3Conf{}
-	ks3 := util.GetConfig().Ks3
-	as3 := util.GetConfig().As3
+	s3 := util.GetConfig().S3
 
-	switch store {
-	case "ks3":
-		s3Conf = S3Conf{AccessKey: ks3.AccessKey, Secretkey: ks3.Secretkey, Region: ks3.Region, Endpoint: ks3.Endpoint}
-	case "as3":
-		s3Conf = S3Conf{AccessKey: as3.AccessKey, Secretkey: as3.Secretkey, Region: as3.Region, Endpoint: as3.Endpoint}
-	default:
-		s3Conf = S3Conf{AccessKey: ks3.AccessKey, Secretkey: ks3.Secretkey, Region: ks3.Region, Endpoint: ks3.Endpoint}
+	s3Conf := S3Conf{
+		AccessKey: s3.AccessKey,
+		Secretkey: s3.Secretkey,
+		Region:    s3.Region,
+		Endpoint:  s3.Endpoint,
 	}
 	return s3Conf
 }

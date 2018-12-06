@@ -2,7 +2,8 @@ package cmd
 
 import (
 	"log"
-	"wps_store/api/rpcserver"
+
+	"github.com/lxlxw/s3-micro/api/rpcserver"
 
 	"github.com/spf13/cobra"
 )

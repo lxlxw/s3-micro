@@ -1,14 +1,14 @@
 package service
 
 import (
-	ws3 "wps_store/pkg/s3"
+	"github.com/lxlxw/s3-micro/pkg/s3"
 
-	pb "wps_store/rpc"
+	pb "github.com/lxlxw/s3-micro/proto"
 )
 
 func CreateBucket(r *pb.CreateBucketRequest) pb.CreateBucketResponse {
 
-	client, _ := ws3.New(r.Store)
+	client, _ := s3.New()
 
 	err := client.CreateBucket(r.Bucketname, r.Publicread)
 	if err != nil {

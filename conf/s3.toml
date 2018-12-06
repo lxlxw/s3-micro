@@ -1,11 +1,5 @@
-[Ks3]
- accesskey = "AKLTRPycUPrRSDOP492EPQO6Bw"
- secretkey = ""
- region = "BEIJING"
- endpoint = "ks3-cn-beijing.ksyun.com"
-
-[As3]
- accesskey = ""
- secretkey = "xxxx"
- region = ""
- endpoint = ""
+[S3]
+accesskey = "AKLTRPycUPrRSDOP492EPQO6Bw"
+secretkey = "xxxx"
+region = "BEIJING"
+endpoint = "ks3-cn-beijing.ksyun.com"

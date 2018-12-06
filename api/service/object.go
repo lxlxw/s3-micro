@@ -1,9 +1,9 @@
 package service
 
 import (
-	ws3 "wps_store/pkg/s3"
+	"github.com/lxlxw/s3-micro/pkg/s3"
 
-	pb "wps_store/rpc"
+	pb "github.com/lxlxw/s3-micro/proto"
 )
 
 /*
@@ -11,7 +11,7 @@ import (
 *
  */
 func PutObject(r *pb.PutObjectRequest) pb.PutObjectResponse {
-	client, _ := ws3.New(r.Store)
+	client, _ := s3.New()
 
 	//判断文件是否存在
 	objectExist, exErr := client.HeadObject(r.Bucketname, r.Key)
@@ -42,7 +42,7 @@ func PutObject(r *pb.PutObjectRequest) pb.PutObjectResponse {
 *
  */
 func GetObject(r *pb.GetObjectRequest) pb.GetObjectResponse {
-	client, _ := ws3.New(r.Store)
+	client, _ := s3.New()
 
 	resBody, err := client.GetObject(r.Bucketname, r.Key, r.Contenttype)
 	if err != nil {
@@ -56,7 +56,7 @@ func GetObject(r *pb.GetObjectRequest) pb.GetObjectResponse {
 *
  */
 func GetObjectPresignedUrl(r *pb.GetObjectPresignedUrlRequest) pb.GetObjectPresignedUrlResponse {
-	client, _ := ws3.New(r.Store)
+	client, _ := s3.New()
 
 	url, err := client.GetObjectPresignedUrl(r.Bucketname, r.Key, r.Expiretime)
 	if err != nil {
@@ -70,7 +70,7 @@ func GetObjectPresignedUrl(r *pb.GetObjectPresignedUrlRequest) pb.GetObjectPresi
 *
  */
 func PutObjectPresignedUrl(r *pb.PutObjectPresignedUrlRequest) pb.PutObjectPresignedUrlResponse {
-	client, _ := ws3.New(r.Store)
+	client, _ := s3.New()
 
 	presignedUrl, err := client.PutObjectPresignedUrl(r.Bucketname, r.Key, r.Contenttype, r.Publicread, r.Contentmaxlength, r.Expiretime)
 	if err != nil {
