@@ -1,6 +1,6 @@
 # s3 upload micro service
 
-This project is an upload and download micro service of Amazon S3 and KS3.
+This project is an upload and download micro service of Amazon S3.
 
 [![Build Status](https://api.travis-ci.org/lxlxw/s3-micro.svg?branch=master)](https://travis-ci.org/lxlxw/s3-micro)
 [![GitHub release](https://img.shields.io/badge/releases-v1.0.1-brightgreen.svg)](https://github.com/lxlxw/s3-micro/releases)
@@ -8,8 +8,8 @@ This project is an upload and download micro service of Amazon S3 and KS3.
 [![GoDoc](https://godoc.org/github.com/lxlxw/s3-micro?status.svg)](https://godoc.org/github.com/lxlxw/s3-micro)
 [![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-[ [English](https://github.com/lxlxw/micro-s3-grpc)
-| [中文](https://github.com/lxlxw/micro-s3-grpc)
+[ [English](https://github.com/lxlxw/s3-micro)
+| [中文](https://github.com/lxlxw/s3-micro)
  ]
 
 ## Table of Contents
@@ -32,20 +32,21 @@ This project is an upload and download micro service of Amazon S3 and KS3.
 Use go get to retrieve the project to add it to your GOPATH workspace, or project's Go module dependencies.
 
 ```bash
-go get github.com/lxlxw/micro-s3-grpc
+go get github.com/lxlxw/s3-micro
 ```
 
 To update the project use go get -u to retrieve the latest version of the project.
 
 ```bash
-go get -u github.com/lxlxw/micro-s3-grpc
+go get -u github.com/lxlxw/s3-micro
 ```
 
 ## Configuration
 ```bash
 cat ./conf/s3.toml
 ```
-```bash
+
+```ini
 [S3]
 accesskey = "AKLTRPycUPrRSDOP492EPQO6Bw"
 secretkey = "xxxx"
@@ -78,7 +79,13 @@ make http
 ```bash
 curl -X POST -k http://localhost:8088/api/object/upload -d '{"bucketname": "test_bucket", "key":"test/test.txt", "filecontent":"xxxxxx"}'
 ```
-You find more detailed api documentation at /doc.
+
+You find more detailed api documentation at [/doc](https://github.com/lxlxw/s3-micro/blob/master/proto/rpc.swagger.json).
+
+or
+
+open http://localhost:8088/swagger-ui
+
 
 ### Grpc examples
 
@@ -93,7 +100,7 @@ import (
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 
-	pb "github.com/lxlxw/micro-s3-grpc/rpc"
+	pb "github.com/lxlxw/s3-micro/proto"
 )
 
 func main() {
@@ -107,8 +114,8 @@ func main() {
 	// new client
 	c := pb.NewStoreApiServiceClient(conn)
 
-	// get method
-	req := &pb.CreateBucketRequest{Store: "ks3", Bucketname: "test-bucket"}
+	// call method
+	req := &pb.CreateBucketRequest{Bucketname: "test-bucket"}
 	res, err := c.CreateBucket(context.Background(), req)
 	if err != nil {
 		log.Println(err)
@@ -131,7 +138,7 @@ func main() {
 ## Support and Feedback
 
 If you find a bug, please submit the issue in Github directly.
-[Micro-S3-Grpc Issues](https://github.com/lxlxw/micro-s3-grpc/issues)
+[S3-Micro Issues](https://github.com/lxlxw/s3-micro/issues)
 
 ## Contact
 
@@ -139,7 +146,7 @@ If you find a bug, please submit the issue in Github directly.
 
 ## License
 
-Micro-S3-Grpc is based on the MIT protocol.
+S3-Micro is based on the MIT protocol.
 
 <http://www.opensource.org/licenses/MIT>
 

@@ -35,15 +35,15 @@ grpc:
 	./proto/rpc.proto
 
 build : 
-	@echo "Building micro store"
+	@echo "Building s3-micro"
 	@go build
 
 server:
-	@echo "Running micro store to cmd/server"
+	@echo "Running s3-micro to cmd/server"
 	@./$(PROJECTNAME) server
 
 http:
-	@echo "Running micro store to cmd/server_http"
+	@echo "Running s3-micro to cmd/server_http"
 	@./$(PROJECTNAME) http
 
 clean:
