@@ -2,14 +2,22 @@
 
 This project is an upload and download micro service of Amazon S3 and KS3.
 
+[![Build Status](https://api.travis-ci.org/lxlxw/s3-micro.svg?branch=master)](https://travis-ci.org/lxlxw/s3-micro)
+[![GitHub release](https://img.shields.io/badge/releases-v1.0.1-brightgreen.svg)](https://github.com/lxlxw/s3-micro/releases)
+[![Go Report Card](https://goreportcard.com/badge/github.com/lxlxw/s3-micro)](https://goreportcard.com/report/github.com/lxlxw/s3-micro)
+[![GoDoc](https://godoc.org/github.com/lxlxw/s3-micro?status.svg)](https://godoc.org/github.com/lxlxw/s3-micro)
+[![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
 [ [English](https://github.com/lxlxw/micro-s3-grpc)
 | [中文](https://github.com/lxlxw/micro-s3-grpc)
  ]
- 
+
 ## Table of Contents
 - [Installation](#installation)
-- [Building](#building)
-- [Configuring](#configuring)
+- [Configuration](#configuration)
+- [Build](#build)
+    - [Run Grpc Server](#run-grpc-server)
+    - [Run Http Server](#run-http-server)
 - [Usage](#usage)
     - [RESTful API examples](#restful-api-examples)
     - [Grpc examples](#all-usage-examples)
@@ -29,22 +37,48 @@ go get github.com/lxlxw/micro-s3-grpc
 
 To update the project use go get -u to retrieve the latest version of the project.
 
-
 ```bash
 go get -u github.com/lxlxw/micro-s3-grpc
 ```
-## Building
 
-## Configuring
+## Configuration
+```bash
+cat ./conf/s3.toml
+```
+```bash
+[S3]
+accesskey = "AKLTRPycUPrRSDOP492EPQO6Bw"
+secretkey = "xxxx"
+region = ""
+endpoint = "ks3testb.s3.amazonaws.com"
+```
+
+## Build
+
+```bash
+make build
+```
+
+### Run Grpc Server
+
+```bash
+make server
+```
+
+### Run Http Server
+
+```bash
+make http
+```
 
 ## Usage
 
 ### RESTful API examples
 
 ```bash
-curl http://localhost:8088/api/object/upload
+curl -X POST -k http://localhost:8088/api/object/upload -d '{"bucketname": "test_bucket", "key":"test/test.txt", "filecontent":"xxxxxx"}'
 ```
-
+You find more detailed api documentation at /doc.
 
 ### Grpc examples
 
