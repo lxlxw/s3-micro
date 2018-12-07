@@ -1,5 +1,5 @@
 [S3]
-accesskey = "AKLTRPycUPrRSDOP492EPQO6Bw"
+accesskey = "AKIAJCWZ4372EFTEW6ZA"
 secretkey = "xxxx"
-region = ""
-endpoint = "ks3testb.s3.amazonaws.com"
+region = "us-east-1"
+endpoint = "s3.amazonaws.com"

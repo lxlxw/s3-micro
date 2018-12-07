@@ -48,10 +48,10 @@ cat ./conf/s3.toml
 
 ```ini
 [S3]
-accesskey = "AKLTRPycUPrRSDOP492EPQO6Bw"
-secretkey = "xxxx"
-region = ""
-endpoint = "ks3testb.s3.amazonaws.com"
+accesskey = "AKIAJCWZ4372EFTEW6ZA"
+secretkey = "xxxxxx"
+region = "us-east-1"
+endpoint = "s3.amazonaws.com"
 ```
 
 ## Build
