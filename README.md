@@ -126,7 +126,7 @@ func main() {
 ```
 ## Features
 
-* Grpc
+* gRPC
 * RESTful API
 * Swagger UI
 * Middleware

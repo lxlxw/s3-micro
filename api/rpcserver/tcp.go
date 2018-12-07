@@ -33,14 +33,14 @@ func RunServer() (err error) {
 	lis, err := net.Listen("tcp", EndPoint)
 	log.Println("Listen success:", EndPoint)
 	if err != nil {
-		log.Fatalf("Grpc服务启动失败: %v", err)
+		log.Fatalf("Grpc server fail: %v", err)
 	}
 	// new interceptor
 	s := grpc.NewServer(grpc.UnaryInterceptor(UnaryInterceptorChain(middleware.Recovery, middleware.Logging)))
 	pb.RegisterStoreApiServiceServer(s, NewStoreApiService())
 	reflection.Register(s)
 	if err := s.Serve(lis); err != nil {
-		log.Fatalf("Grpc服务启动失败: %v", err)
+		log.Fatalf("Grpc server fail: %v", err)
 	}
 	return err
 }

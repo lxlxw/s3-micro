@@ -10,7 +10,7 @@ import (
 
 var serverCmd = &cobra.Command{
 	Use:   "server",
-	Short: "Run the gRPC wps store micro service",
+	Short: "Run the gRPC for S3 microservice",
 	Run: func(cmd *cobra.Command, args []string) {
 		defer func() {
 			if err := recover(); err != nil {

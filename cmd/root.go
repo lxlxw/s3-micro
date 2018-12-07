@@ -9,7 +9,7 @@ import (
 
 var rootCmd = &cobra.Command{
 	Use:   "grpc",
-	Short: "Run the gRPC wps store micro service",
+	Short: "Run the server for S3 microservice",
 }
 
 // Root cmd
