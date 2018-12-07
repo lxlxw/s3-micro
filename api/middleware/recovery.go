@@ -13,7 +13,7 @@ const (
 	MAXSTACKSIZE = 4096
 )
 
-// Recovery interceptor to handle grpc panic
+// Recovery interceptor to handle grpc panic.
 func Recovery(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (resp interface{}, err error) {
 	// recovery func
 	defer func() {

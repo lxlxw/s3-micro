@@ -6,14 +6,10 @@ import (
 	pb "github.com/lxlxw/s3-micro/proto"
 )
 
-/*
-* 上传文件
-*
- */
+// Puts s3 object
 func PutObject(r *pb.PutObjectRequest) pb.PutObjectResponse {
 	client, _ := s3.New()
 
-	//判断文件是否存在
 	objectExist, exErr := client.HeadObject(r.Bucketname, r.Key)
 	if exErr != nil {
 		return pb.PutObjectResponse{Msg: exErr.Error(), Code: 403}
@@ -37,10 +33,7 @@ func PutObject(r *pb.PutObjectRequest) pb.PutObjectResponse {
 	return pb.PutObjectResponse{Msg: "success", Code: 200, Data: url}
 }
 
-/*
-*  下载文件
-*
- */
+// Downloads s3 object
 func GetObject(r *pb.GetObjectRequest) pb.GetObjectResponse {
 	client, _ := s3.New()
 
@@ -51,10 +44,7 @@ func GetObject(r *pb.GetObjectRequest) pb.GetObjectResponse {
 	return pb.GetObjectResponse{Msg: "success", Code: 200, Data: resBody}
 }
 
-/*
-*  获取文件下载外链
-*
- */
+// Gets s3 object presigned url
 func GetObjectPresignedUrl(r *pb.GetObjectPresignedUrlRequest) pb.GetObjectPresignedUrlResponse {
 	client, _ := s3.New()
 
@@ -65,10 +55,7 @@ func GetObjectPresignedUrl(r *pb.GetObjectPresignedUrlRequest) pb.GetObjectPresi
 	return pb.GetObjectPresignedUrlResponse{Msg: "success", Code: 200, Data: url}
 }
 
-/*
-*  生成文件上传外链
-*
- */
+// Puts s3 object presigned url
 func PutObjectPresignedUrl(r *pb.PutObjectPresignedUrlRequest) pb.PutObjectPresignedUrlResponse {
 	client, _ := s3.New()
 

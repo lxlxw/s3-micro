@@ -6,8 +6,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-//TODO: 读取配置文件
-var Version = "v1.0"
+var Version = "v1.0.1"
 
 func ShowVersion() {
 	fmt.Printf("s3 microservice version: %s\n", Version)

@@ -26,10 +26,7 @@ func NewStoreApiService() *apiService {
 	return &apiService{}
 }
 
-func ErrorResponse() (*pb.PutObjectResponse, error) {
-	return &pb.PutObjectResponse{Msg: "操作失败!", Code: -1, Data: ""}, nil
-}
-
+// Run server
 func RunServer() (err error) {
 	EndPoint = ":" + ServerPort
 
@@ -38,7 +35,7 @@ func RunServer() (err error) {
 	if err != nil {
 		log.Fatalf("Grpc服务启动失败: %v", err)
 	}
-	// 注册interceptor
+	// new interceptor
 	s := grpc.NewServer(grpc.UnaryInterceptor(UnaryInterceptorChain(middleware.Recovery, middleware.Logging)))
 	pb.RegisterStoreApiServiceServer(s, NewStoreApiService())
 	reflection.Register(s)
@@ -48,6 +45,7 @@ func RunServer() (err error) {
 	return err
 }
 
+// Unary interceptor chain
 func UnaryInterceptorChain(interceptors ...grpc.UnaryServerInterceptor) grpc.UnaryServerInterceptor {
 	return func(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (resp interface{}, err error) {
 		chain := handler
@@ -58,6 +56,7 @@ func UnaryInterceptorChain(interceptors ...grpc.UnaryServerInterceptor) grpc.Una
 	}
 }
 
+// build interceptors
 func build(c grpc.UnaryServerInterceptor, n grpc.UnaryHandler, info *grpc.UnaryServerInfo) grpc.UnaryHandler {
 	return func(ctx context.Context, req interface{}) (interface{}, error) {
 		return c(ctx, req, info, n)

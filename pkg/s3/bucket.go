@@ -5,6 +5,7 @@ import (
 	"github.com/ks3sdklib/aws-sdk-go/service/s3"
 )
 
+// Creates a new bucket.
 func (svc *S3) CreateBucket(bucketName, acl string) error {
 	input := &s3.CreateBucketInput{
 		Bucket: aws.String(bucketName),

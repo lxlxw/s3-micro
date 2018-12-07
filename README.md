@@ -1,6 +1,6 @@
-# s3 upload micro service
+# S3 microservice
 
-This project is an upload and download micro service of Amazon S3.
+This project is an upload and download microservice of Amazon S3.
 
 [![Build Status](https://api.travis-ci.org/lxlxw/s3-micro.svg?branch=master)](https://travis-ci.org/lxlxw/s3-micro)
 [![GitHub release](https://img.shields.io/badge/releases-v1.0.1-brightgreen.svg)](https://github.com/lxlxw/s3-micro/releases)
@@ -57,6 +57,7 @@ endpoint = "ks3testb.s3.amazonaws.com"
 ## Build
 
 ```bash
+$ cd "$GOPATH/src/github.com/lxlxw/s3-micro"
 make build
 ```
 

@@ -2,7 +2,7 @@ package util
 
 import "os"
 
-// 判断文件夹是否存在
+// Files path exists
 func PathExists(path string) (bool, error) {
 	_, err := os.Stat(path)
 	if err == nil {
@@ -14,14 +14,14 @@ func PathExists(path string) (bool, error) {
 	return false, err
 }
 
-// 获取当前工作路径
+// Gets project path
 func GetProjectPath() string {
 	var projectPath string
 	projectPath, _ = os.Getwd()
 	return projectPath
 }
 
-// 获取配置文件路径
+// Gets config path
 func GetConfigPath(confName string) string {
 	path := GetProjectPath()
 	if ostype == "windows" {
@@ -32,7 +32,7 @@ func GetConfigPath(confName string) string {
 	return path
 }
 
-// 更新配置文件
+// Updates config file
 func UpdateConfigFile(fileContent, fileName string) error {
 
 	pathFile := GetConfigPath(fileName)

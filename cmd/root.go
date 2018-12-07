@@ -12,6 +12,7 @@ var rootCmd = &cobra.Command{
 	Short: "Run the gRPC wps store micro service",
 }
 
+// Root cmd
 func Execute() {
 	if err := rootCmd.Execute(); err != nil {
 		fmt.Println(err)

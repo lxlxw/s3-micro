@@ -10,6 +10,7 @@ import (
 	"github.com/ks3sdklib/aws-sdk-go/service/s3"
 )
 
+// Retrieves objects from Amazon S3.
 func (svc *S3) GetObject(bucketName, key, contentType string) (string, error) {
 	input := &s3.GetObjectInput{
 		Bucket:              aws.String(bucketName),
@@ -25,6 +26,7 @@ func (svc *S3) GetObject(bucketName, key, contentType string) (string, error) {
 	return resBody, nil
 }
 
+// The HEAD operation without returning the object itself.
 func (svc *S3) HeadObject(bucketName, key string) (bool, error) {
 	input := &s3.HeadObjectInput{
 		Bucket: aws.String(bucketName),
@@ -36,6 +38,7 @@ func (svc *S3) HeadObject(bucketName, key string) (bool, error) {
 	return true, nil
 }
 
+// The HEAD operation returning the object presigned url.
 func (svc *S3) HeadObjectPresignedUrl(bucketName, key string, expireTime int64) (*url.URL, bool) {
 	input := &s3.HeadObjectInput{
 		Bucket: aws.String(bucketName),
@@ -48,13 +51,14 @@ func (svc *S3) HeadObjectPresignedUrl(bucketName, key string, expireTime int64) 
 	return res, true
 }
 
+// Puts object
 func (svc *S3) PutObject(bucketName, key, fileContent, contentType, publicRead string, size, expireTime int64) error {
 	input := &s3.PutObjectInput{
-		Bucket:           aws.String(bucketName),         // bucket名称
+		Bucket:           aws.String(bucketName),         // bucket name
 		Key:              aws.String(key),                // object key
-		ACL:              aws.String(publicRead),         //权限，支持private(私有)，public-read(公开读)
-		Body:             strings.NewReader(fileContent), //bytes.NewReader([]byte(fileContent)), //要上传的内容
-		ContentType:      aws.String(contentType),        //设置content-type
+		ACL:              aws.String(publicRead),         // acl, private, public-read
+		Body:             strings.NewReader(fileContent), // bytes.NewReader([]byte(fileContent)),
+		ContentType:      aws.String(contentType),        // set content-type
 		ContentMaxLength: aws.Long(size),
 		Expires:          aws.Time(time.Now().Add(time.Second * time.Duration(expireTime))),
 	}
@@ -64,6 +68,7 @@ func (svc *S3) PutObject(bucketName, key, fileContent, contentType, publicRead s
 	return nil
 }
 
+// Gets object returning the object presigned url.
 func (svc *S3) GetObjectPresignedUrl(bucketName, key string, expireTime int64) (string, error) {
 	input := &s3.GetObjectInput{
 		Bucket: aws.String(bucketName),
@@ -76,6 +81,7 @@ func (svc *S3) GetObjectPresignedUrl(bucketName, key string, expireTime int64) (
 	return resp.String(), nil
 }
 
+// Puts object returning the object presigned url.
 func (svc *S3) PutObjectPresignedUrl(bucketName, key, contentType, publicRead string, size, expireTime int64) (string, error) {
 	input := &s3.PutObjectInput{
 		Bucket:           aws.String(bucketName),

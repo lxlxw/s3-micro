@@ -26,7 +26,7 @@ var configInfo Config
 var confName string
 var ostype = runtime.GOOS
 
-// 格式化toml文件
+// Encode config
 func EncodeConfig(conf *Config) (string, error) {
 	buf := new(bytes.Buffer)
 	if err := toml.NewEncoder(buf).Encode(conf); err != nil {
@@ -35,7 +35,7 @@ func EncodeConfig(conf *Config) (string, error) {
 	return buf.String(), nil
 }
 
-// 解析配置文件
+// Parse config file
 func ParseConfigFile(filePath string) {
 	fi, err := os.Open(filePath)
 	if err != nil {
@@ -48,12 +48,12 @@ func ParseConfigFile(filePath string) {
 	}
 }
 
-// 获取配置文件信息
+// Gets config info
 func GetConfig() Config {
 	return configInfo
 }
 
-// 生效配置文件
+// Sets config info
 func SetConfig(confName string) {
 	configFile := GetConfigPath(confName)
 	ParseConfigFile(configFile)

@@ -6,10 +6,7 @@ import (
 	pb "github.com/lxlxw/s3-micro/proto"
 )
 
-/*
-* 更新配置文件
-*
- */
+// Updates s3 config info
 func UpdateConfigStoreInfo(r *pb.UpdateConfigStoreInfoRequest) pb.UpdateConfigStoreInfoResponse {
 
 	s3Conf := util.Config{
@@ -32,10 +29,7 @@ func UpdateConfigStoreInfo(r *pb.UpdateConfigStoreInfoRequest) pb.UpdateConfigSt
 	return pb.UpdateConfigStoreInfoResponse{Msg: "success", Code: 200, Data: ""}
 }
 
-/*
-*  获取配置文件信息
-*
- */
+// Gets s3 config info
 func GetConfigStoreInfo(r *pb.GetConfigStoreInfoRequest) pb.GetConfigStoreInfoResponse {
 	conf := s3.GetS3Conf()
 

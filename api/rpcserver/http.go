@@ -21,6 +21,7 @@ var (
 	HttpEndPoint   string
 )
 
+// Run httpserver.
 func RunHttpServer() (err error) {
 	ctx := context.Background()
 	ctx, cancel := context.WithCancel(ctx)
@@ -57,6 +58,7 @@ func RunHttpServer() (err error) {
 	return err
 }
 
+// Swagger json file, http://localhost:port/swagger/rpc.swagger.json
 func serveSwaggerFile(w http.ResponseWriter, r *http.Request) {
 	if !strings.HasSuffix(r.URL.Path, "swagger.json") {
 		log.Printf("Not Found: %s", r.URL.Path)
@@ -72,6 +74,7 @@ func serveSwaggerFile(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w, r, p)
 }
 
+// Swagger ui, http://localhost:port/swagger-ui
 func serveSwaggerUI(mux *http.ServeMux) {
 	fileServer := http.FileServer(&assetfs.AssetFS{
 		Asset:    swagger.Asset,

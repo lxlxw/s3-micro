@@ -8,17 +8,27 @@ import (
 	"github.com/lxlxw/s3-micro/pkg/util"
 )
 
+// S3 is a client for Amazon S3.
 type S3 struct {
 	*s3.S3
 }
 
+// S3 config info
 type S3Conf struct {
+	// S3 access key
 	AccessKey string
+
+	// S3 secret key
 	Secretkey string
-	Region    string
-	Endpoint  string
+
+	// S3 region
+	Region string
+
+	// S3 endpoint
+	Endpoint string
 }
 
+// New returns a new S3 client.
 func New() (*S3, error) {
 	conf := GetS3Conf()
 
@@ -35,6 +45,7 @@ func New() (*S3, error) {
 	return &S3{S3: client}, nil
 }
 
+// Get S3 config info.
 func GetS3Conf() S3Conf {
 	util.SetConfig(S3_CONF_FILENNAME)
 	s3 := util.GetConfig().S3

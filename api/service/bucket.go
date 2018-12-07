@@ -6,6 +6,7 @@ import (
 	pb "github.com/lxlxw/s3-micro/proto"
 )
 
+// Creates s3 bucket
 func CreateBucket(r *pb.CreateBucketRequest) pb.CreateBucketResponse {
 
 	client, _ := s3.New()
