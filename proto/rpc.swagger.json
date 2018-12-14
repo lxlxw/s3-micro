@@ -41,6 +41,58 @@
         ]
       }
     },
+    "/bucket/delete": {
+      "post": {
+        "operationId": "DeleteBucket",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/protoDeleteBucketResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/protoDeleteBucketRequest"
+            }
+          }
+        ],
+        "tags": [
+          "StoreApiService"
+        ]
+      }
+    },
+    "/bucket/list": {
+      "post": {
+        "operationId": "ListBucket",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/protoListBucketResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/protoListBucketRequest"
+            }
+          }
+        ],
+        "tags": [
+          "StoreApiService"
+        ]
+      }
+    },
     "/config/download": {
       "get": {
         "operationId": "GetConfigStoreInfo",
@@ -232,6 +284,32 @@
         }
       }
     },
+    "protoDeleteBucketRequest": {
+      "type": "object",
+      "properties": {
+        "store": {
+          "type": "string"
+        },
+        "bucketname": {
+          "type": "string"
+        }
+      }
+    },
+    "protoDeleteBucketResponse": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "msg": {
+          "type": "string"
+        },
+        "data": {
+          "type": "string"
+        }
+      }
+    },
     "protoGetConfigStoreInfoResponse": {
       "type": "object",
       "properties": {
@@ -303,6 +381,40 @@
         },
         "data": {
           "type": "string"
+        }
+      }
+    },
+    "protoListBucket": {
+      "type": "object",
+      "properties": {
+        "bucket": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "protoListBucketRequest": {
+      "type": "object",
+      "properties": {
+        "store": {
+          "type": "string"
+        }
+      }
+    },
+    "protoListBucketResponse": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "msg": {
+          "type": "string"
+        },
+        "data": {
+          "$ref": "#/definitions/protoListBucket"
         }
       }
     },

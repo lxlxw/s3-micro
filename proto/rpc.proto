@@ -11,6 +11,21 @@ service StoreApiService {
             body: "*"
 		};
 	}
+
+	rpc DeleteBucket(DeleteBucketRequest) returns (DeleteBucketResponse) {
+		option (google.api.http) = {
+			post: "/bucket/delete"
+            body: "*"
+		};
+	}
+
+	rpc ListBucket(ListBucketRequest) returns (ListBucketResponse) {
+		option (google.api.http) = {
+			post: "/bucket/list"
+			body: "*"
+		};
+	}
+
 	rpc PutObject(PutObjectRequest) returns (PutObjectResponse) {
 		option (google.api.http) = {
 			post: "/object/upload"
@@ -62,6 +77,31 @@ message CreateBucketResponse {
 	int32 code = 1;
 	string msg = 2;
     string data = 3;  
+}
+
+message DeleteBucketRequest {
+	string store = 1; 
+	string bucketname = 2; 
+}
+
+message DeleteBucketResponse {
+	int32 code = 1;
+	string msg = 2;
+    string data = 3;  
+}
+
+message ListBucketRequest {
+	string store = 1; 
+}
+
+message ListBucketResponse {
+	int32 code = 1;
+	string msg = 2;
+    ListBucket data = 3;  
+}
+
+message ListBucket {
+    repeated string bucket = 1;   
 }
 
 message PutObjectRequest {
