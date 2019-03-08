@@ -37,10 +37,10 @@ func New() (*S3, error) {
 		Region:           conf.Region,
 		Credentials:      credentials,
 		Endpoint:         conf.Endpoint,
-		DisableSSL:       true,  //是否禁用https
-		LogLevel:         1,     //是否开启日志,0为关闭日志，1为开启日志
-		S3ForcePathStyle: false, //是否强制使用path style方式访问
-		LogHTTPBody:      true,  //是否把HTTP请求body打入日志
+		DisableSSL:       true,
+		LogLevel:         1,
+		S3ForcePathStyle: false,
+		LogHTTPBody:      true,
 	})
 	return &S3{S3: client}, nil
 }

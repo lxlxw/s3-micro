@@ -21,7 +21,7 @@ func CreateBucket(r *pb.CreateBucketRequest) pb.CreateBucketResponse {
 // Delete s3 bucket
 func DeleteBucket(r *pb.DeleteBucketRequest) pb.DeleteBucketResponse {
 
-	client, _ := s3.New(r.Store)
+	client, _ := s3.New()
 
 	err := client.DeleteBucket(r.Bucketname)
 	if err != nil {
@@ -33,7 +33,7 @@ func DeleteBucket(r *pb.DeleteBucketRequest) pb.DeleteBucketResponse {
 // List s3 bucket
 func ListBucket(r *pb.ListBucketRequest) pb.ListBucketResponse {
 
-	client, _ := s3.New(r.Store)
+	client, _ := s3.New()
 
 	res, err := client.ListBucket()
 	if err != nil {
