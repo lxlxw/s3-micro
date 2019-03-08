@@ -16,3 +16,22 @@ func (svc *S3) CreateBucket(bucketName, acl string) error {
 	}
 	return nil
 }
+
+func (svc *S3) DeleteBucket(bucketName string) error {
+	input := &s3.DeleteBucketInput{
+		Bucket: aws.String(bucketName),
+	}
+	if _, err := svc.S3.DeleteBucket(input); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (svc *S3) ListBucket() (*s3.ListBucketsOutput, error) {
+	input := &s3.ListBucketsInput{}
+	res, err := svc.S3.ListBuckets(input)
+	if err != nil {
+		return res, err
+	}
+	return res, nil
+}
