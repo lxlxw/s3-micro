@@ -7,6 +7,7 @@ This project is an upload and download microservice of Amazon S3.
 [![Go Report Card](https://goreportcard.com/badge/github.com/lxlxw/s3-micro)](https://goreportcard.com/report/github.com/lxlxw/s3-micro)
 [![GoDoc](https://godoc.org/github.com/lxlxw/s3-micro?status.svg)](https://godoc.org/github.com/lxlxw/s3-micro)
 [![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![HitCount](http://hits.dwyl.io/lxlxw/s3-micro.svg)](http://hits.dwyl.io/lxlxw/s3-micro)
 
 [ [English](https://github.com/lxlxw/s3-micro)
 | [中文](https://github.com/lxlxw/s3-micro)
